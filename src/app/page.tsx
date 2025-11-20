@@ -1,10 +1,14 @@
 const products = [
   {
     name: "SeedPocket",
-    type: "Web Service",
+    type: "Web & Mobile",
     description:
-      "AquaPeakが提供する Web プロジェクト。SeedPocket の公式サイトで最新アップデートをご覧いただけます。",
-    highlights: ["公式サイト: seed-pocket.aquapeak.link"],
+      "家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる“暮らしのノート”。キッチンと畑をまたいで記録できます。",
+    highlights: [
+      "栽培スケジュールと収穫ログをレシピ候補と連動させて可視化",
+      "畑の状況は屋外でアプリから記録、栽培計画は自宅のPCから管理",
+      "Webとモバイルアプリを同時リリース",
+    ],
     linkLabel: "SeedPocket を開く",
     href: "https://seed-pocket.aquapeak.link/",
   },
@@ -14,9 +18,9 @@ const products = [
     description:
       "資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。実績入力から将来シミュレーションまでスマホひとつで完結します。",
     highlights: [
-      "晴れ・曇り・雨の気象メタファーで毎日の資産コンディションを可視化",
-      "50種類以上の指標・グラフを自由に配置できるカスタマイズ可能な分析画面",
-      "データは端末内にのみ保存し、外部送信なしのオフライン動作でプライバシーを確保",
+      "晴れ・曇り・雨の天気マークで毎月の資産コンディションを可視化",
+      "50種類以上の指標・グラフを自由に配置できる分析画面",
+      "通信層での漏洩防止のため、データは端末内にのみ保存",
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
@@ -48,17 +52,17 @@ const services = [
 ];
 
 const stats = [
-  { value: "25+", label: "ローンチしたプロダクト" },
+  { value: "5+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
-  { value: "12 週間", label: "平均リリースリードタイム" },
-  { value: "3 拠点", label: "Tokyo / Fukuoka / Remote" },
+  { value: "2 週間", label: "平均リリースリードタイム" },
+  { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
 ];
 
 const sectors = [
-  { name: "Fintech", detail: "資産管理・決済・投資アプリ" },
-  { name: "Wellness", detail: "ヘルスケア / メンタルケアサービス" },
-  { name: "Smart Work", detail: "現場/フィールド向け業務アプリ" },
-  { name: "Lifestyle", detail: "コミュニティ / サブスク / EC" },
+  { name: "Fintech", detail: "資産管理・分析・投資" },
+  { name: "Talent & Tech", detail: "アサイン管理 / 人材開発 / toBサービス" },
+  { name: "Lifestyle", detail: "家庭菜園 / レシピ / 記録" },
+  { name: "Travl", detail: "旅行計画 / 地図 / ナビゲーション" },
 ];
 
 const timeline = [
@@ -94,7 +98,7 @@ export default function Home() {
               AquaPeak / Digital Product Studio
             </p>
             <h1 className="mt-2 text-2xl font-semibold text-white">
-              アイデアを、使われ続けるサービスへ。
+            より長く、より多くの人に使われるサービスへ。
             </h1>
           </div>
           <div className="flex flex-wrap items-center gap-3 text-sm text-slate-200">
@@ -118,12 +122,14 @@ export default function Home() {
             </p>
             <div className="space-y-6">
               <h2 className="text-4xl font-semibold leading-tight text-white md:text-5xl">
-                モバイルと Web を横断した、体験ドリブンなプロダクト開発。
+                <span className="block">モバイルと Web を</span>
+                <span className="block">縦横無尽に駆ける</span>
+                <span className="block">プロダクト開発集団。</span>
               </h2>
               <p className="text-lg text-slate-300">
                 AquaPeak はモバイルアプリと Web サービスを自社で企画・開発・運営するチームです。
-                SeedPocket や Asset Forecast で培ったUXとテクノロジーを核に、生活者の行動をなめらかにする
-                プロダクトを継続的にローンチしています。
+                家庭菜園とレシピをつなぐ SeedPocket、資産の“天気”を可視化する Asset Forecast などで培った
+                UX とテクノロジーを核に、生活者の行動をなめらかにするプロダクトを継続的にローンチしています。
               </p>
             </div>
             <div className="flex flex-wrap gap-4">
@@ -260,7 +266,7 @@ export default function Home() {
               どんな領域の課題に向き合っているか
             </h3>
             <p className="text-base text-slate-300">
-              Fintech、ヘルスケア、スマートワークなど、データドリブンな体験を求められる領域で自社プロダクトを展開し検証しています。
+              Fintech、ライフスタイルなどのtoC向けプロダクトはもちろん、人材開発領域でのtoB向けプロダクトも展開し検証しています。
             </p>
           </div>
           <div className="grid gap-4">
@@ -311,7 +317,8 @@ export default function Home() {
             </p>
             <h3 className="text-3xl font-semibold text-white">渋谷オフィス</h3>
             <p className="text-base text-slate-300">
-              少人数のクロスファンクショナルチームが常駐するクリエイティブスタジオです。オンラインと現地のハイブリッドでプロダクトを磨き込んでいます。
+              事業拡大に伴い、東京都渋谷区に新たなオフィスを開設いたしました。
+              アクセス性の高い渋谷の中心地に拠点を設けることで、迅速なサービス提供を推進してまいります。
             </p>
           </div>
           <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
