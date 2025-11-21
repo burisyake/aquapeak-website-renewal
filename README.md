@@ -1,36 +1,25 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# AquaPeak Website
 
-## Getting Started
+AquaPeak の公式ウェブサイトのリポジトリです。
 
-First, run the development server:
+## 🌐 公開サイト
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+**このリポジトリを見てくださった方は、ぜひ公開中のウェブサイトもご覧ください：**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+👉 **[https://aquapeakstudio.com/](https://aquapeakstudio.com/)**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## About AquaPeak
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+AquaPeak はモバイルアプリと Web サービスを自社で企画・開発・運営するチームです。家庭菜園とレシピをつなぐ SeedPocket、資産の"天気"を可視化する Asset Forecast などで培った UX とテクノロジーを核に、生活者の行動をなめらかにするプロダクトを継続的にローンチしています。
 
-## Learn More
+## 🚀 ローンチしたサービス
 
-To learn more about Next.js, take a look at the following resources:
+### SeedPocket
+家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる"暮らしのノート"。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+👉 **[https://seed-pocket.aquapeak.link/](https://seed-pocket.aquapeak.link/)**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Asset Forecast
+資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+👉 **[App Store で見る](https://apps.apple.com/jp/app/asset-forecast/id6753914294)**
