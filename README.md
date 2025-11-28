@@ -17,7 +17,7 @@ AquaPeak はモバイルアプリと Web サービスを自社で企画・開発
 ### SeedPocket
 家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる"暮らしのノート"。
 
-👉 **[https://seed-pocket.aquapeak.link/](https://seed-pocket.aquapeak.link/)**
+👉 **[https://seedpocket.net/](https://seedpocket.net/)**
 
 ### Asset Forecast
 資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。
