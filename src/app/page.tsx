@@ -10,7 +10,7 @@ const products = [
       "Webとモバイルアプリを同時リリース",
     ],
     linkLabel: "SeedPocket を開く",
-    href: "https://seed-pocket.aquapeak.link/",
+    href: "https://seedpocket.net/",
   },
   {
     name: "Asset Forecast",
