@@ -9,8 +9,8 @@ const products = [
       "畑の状況は屋外でアプリから記録、栽培計画は自宅のPCから管理",
       "Webとモバイルアプリを同時リリース",
     ],
-    linkLabel: "SeedPocket を開く",
-    href: "https://seedpocket.net/",
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/seed-pocket/id6756086853",
   },
   {
     name: "Asset Forecast",
@@ -24,6 +24,45 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
+  },
+  {
+    name: "麻雀クイズ！〜役・翻符・点数〜",
+    type: "Mobile App",
+    description:
+      "役の翻数・役判定・翻符読み取り・点数計算を5段階で反復練習できる、麻雀点数計算トレーニングアプリ。",
+    highlights: [
+      "Lv.0〜Lv.4の段階式クイズで基礎から実戦力までカバー",
+      "手牌を見ながら役・翻符・点数を総合的に判断する出題",
+      "履歴画面で正答率やスコア推移を振り返り可能",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
+  },
+  {
+    name: "ふたり家計",
+    type: "Mobile App",
+    description:
+      "夫婦・カップル向けに毎月の家計精算を自動化。立て替えや共通口座の入金額をシンプルに算出できる家計管理アプリ。",
+    highlights: [
+      "負担比率を柔軟に設定し、精算額を自動計算",
+      "個人払い・共通支出・口座ごとの必要入金額を可視化",
+      "月別履歴とグラフ表示で支出傾向を確認",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
+  },
+  {
+    name: "九九九！ 〜 3桁掛け算九九〜",
+    type: "Mobile App",
+    description:
+      "1桁から3桁まで自由な組み合わせで暗算力を鍛える計算トレーニングアプリ。速度と正確性を両立した反復学習に対応。",
+    highlights: [
+      "桁数設定を細かくカスタマイズできる出題",
+      "10問モードと無限モードで学習スタイルを選択可能",
+      "カレンダーと成績グラフで継続状況と弱点を可視化",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
   },
 ];
 
