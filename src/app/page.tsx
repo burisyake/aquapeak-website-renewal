@@ -141,6 +141,20 @@ const products = [
     href: "https://apps.apple.com/us/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e2/e8/cb/e2e8cb46-f90c-b0d5-b9ae-fbd87c093c2e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
   },
+  {
+    name: "Pomodoro TaskTic",
+    type: "Mobile App",
+    description:
+      "ポモドーロテクニックに基づいた生産性アプリ。集中25分・休憩5分を繰り返すサイクルで、仕事・学習の集中力を高めます。",
+    highlights: [
+      "集中・休憩時間をライフスタイルに合わせてカスタマイズ",
+      "ポモドーロサイクルで集中力を継続してゴール達成をサポート",
+      "仕事・学習効率の改善に特化したシンプルなUI",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/pomodoro-tasktic/id6743796326",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b3/4e/f6/b34ef6eb-6717-9238-293a-cba0fd77b5c1/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+  },
 ];
 
 const services = [
@@ -168,15 +182,14 @@ const services = [
 ];
 
 const stats = [
-  { value: "5+", label: "ローンチしたプロダクト" },
+  { value: "11+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
-  { value: "2 週間", label: "平均リリースリードタイム" },
+  { value: "1 週間", label: "平均リリースリードタイム" },
   { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
 ];
 
 const sectors = [
   { name: "Fintech", detail: "資産管理・分析・投資" },
-  { name: "Talent & Tech", detail: "アサイン管理 / 人材開発 / toBサービス" },
   { name: "Lifestyle", detail: "家庭菜園 / レシピ / 記録" },
   { name: "Travl", detail: "旅行計画 / 地図 / ナビゲーション" },
 ];
