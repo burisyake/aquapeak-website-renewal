@@ -16,6 +16,34 @@ const products = [
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/02/fa/30/02fa307d-c2a1-72c7-2358-7ad6340ad3d6/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
+    name: "Focus Pet - Habbit",
+    type: "Mobile App",
+    description:
+      "タスク完了とフォーカス時間でXPを稼ぎ、ペットを育てるタスク管理アプリ。生産性向上をゲーム感覦で楽しめます。",
+    highlights: [
+      "タスク完了とフォーカスセッションでペットが進化",
+      "XP・報酬システムで習慣化をサポート",
+      "ゲーム感覦でTODO管理を楽しめる",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/focus-pet-habbit/id6759491280",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/cd/c7/b0cdc758-0732-9009-160b-4ec004827650/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
+    name: "Book Echo - Action Tip",
+    type: "Mobile App",
+    description:
+      "読んだ本の知識をアクションに変える読書管理アプリ。「読んで終わり」ではなく、実生活での変化につながる学びをサポートします。",
+    highlights: [
+      "未読・読書中・読了でスマートにライブラリ管理",
+      "気づきをアクションプランとして記録",
+      "読書と実践のギャップを埋める構造化ノート機能",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/book-echo-action-tip/id6759045118",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bd/93/1f/bd931fa0-1b49-8052-6cee-8997f9ceffad/AppIcon-1x_U007emarketing-0-6-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
     name: "麻雀クイズ！〜役・翻符・点数〜",
     type: "Mobile App",
     description:
@@ -70,6 +98,48 @@ const products = [
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/09/7e/ad097e4f-38a2-9334-deb9-c87016cf3e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+  },
+  {
+    name: "Word Pocket - Pet",
+    type: "Mobile App",
+    description:
+      "ペットを育てながら語彙力を錢えるゲーミファイかれた単語学習アプリ。科学的な間隔反復法で効率よく単語を定着させます。",
+    highlights: [
+      "科学的な間隔反復法（SRS）で記憶を最大化",
+      "学習の進捗でコンパニオンペットが成長",
+      "ゲーム感覦で毎日の学習を継続できる仕組み",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/word-pocket-pet/id6759867409",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2a/c5/2d/2ac52de2-f865-d459-cfa4-a2b304945ec9/AppIcon-1x_U007epad-0-1-85-220-0.png/512x512bb.jpg",
+  },
+  {
+    name: "Stock Nest - Management",
+    type: "Mobile App",
+    description:
+      "食材・日用品・医薬品・ペット用品まで、家庭の在庫をまとめて管理するスマートな在庫管理アプリ。賞味期限もロット単位で追跡できます。",
+    highlights: [
+      "ロット単位で賞味期限・消費期限を管理",
+      "食料品から日用品・医薬品まで幅広い品目に対応",
+      "美しいUIで家の在庫を一元管理",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/stock-nest-management/id6760417366",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/76/fd/bb/76fdbb5f-c352-7ed5-97f7-92f5b6c51bc7/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
+    name: "ドキドキスイッチ",
+    type: "Mobile App",
+    description:
+      "スイッチを1つずつ押して、爆弾を避けて全クリアを目指せ。シンプルなルールなのに銃薇気MAXなミニゲーム。飲み会やパーティーの罰ゲームにも。",
+    highlights: [
+      "爆弾の数やスイッチ数を自由にカスタマイズ",
+      "ひとりでじっく、みんなでワイワイ遅べるミニゲーム",
+      "飲み会・パーティーの罰ゲームに最適",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e2/e8/cb/e2e8cb46-f90c-b0d5-b9ae-fbd87c093c2e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
   },
 ];
 
@@ -223,7 +293,7 @@ export default function Home() {
             {products.map((product) => (
               <article
                 key={product.name}
-                className="flex h-full flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6"
+                className="flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
               >
                 <div className="flex items-center gap-4">
                   {product.appIconUrl && (
@@ -244,7 +314,7 @@ export default function Home() {
                   <p className="mt-2 text-sm text-slate-300">{product.description}</p>
                 </div>
                 {product.highlights?.length ? (
-                  <ul className="space-y-2 text-sm text-slate-200">
+                  <ul className="space-y-1 text-sm text-slate-200">
                     {product.highlights.map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-300" />
