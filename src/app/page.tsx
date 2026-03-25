@@ -293,7 +293,7 @@ export default function Home() {
             {products.map((product) => (
               <article
                 key={product.name}
-                className="flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
+                className="relative flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
               >
                 <div className="flex items-center gap-4">
                   {product.appIconUrl && (
@@ -325,7 +325,7 @@ export default function Home() {
                 ) : null}
                 <a
                   href={product.href}
-                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 hover:text-cyan-100"
+                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 hover:text-cyan-100 after:absolute after:inset-0"
                   target="_blank"
                   rel="noreferrer"
                 >
