@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const products = [
   {
     name: "SeedPocket",
@@ -11,6 +13,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/seed-pocket/id6756086853",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a6/f2/e2/a6f2e2e1-2919-f011-c4c1-152c35cf2d82/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "Asset Forecast",
@@ -24,6 +27,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/02/fa/30/02fa307d-c2a1-72c7-2358-7ad6340ad3d6/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "麻雀クイズ！〜役・翻符・点数〜",
@@ -37,6 +41,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/26/32/4c/26324cbe-403d-6954-a05c-06d3dcd57b26/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg",
   },
   {
     name: "ふたり家計",
@@ -50,6 +55,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/20/3e/94/203e9431-5d34-7967-3dc5-ebe265de17b2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "九九九！ 〜 3桁掛け算九九〜",
@@ -63,6 +69,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/09/7e/ad097e4f-38a2-9334-deb9-c87016cf3e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
 ];
 
@@ -218,8 +225,19 @@ export default function Home() {
                 key={product.name}
                 className="flex h-full flex-col gap-4 rounded-2xl border border-white/10 bg-white/5 p-6"
               >
-                <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                  {product.type}
+                <div className="flex items-center gap-4">
+                  {product.appIconUrl && (
+                    <Image
+                      src={product.appIconUrl}
+                      alt={`${product.name} icon`}
+                      width={56}
+                      height={56}
+                      className="rounded-xl"
+                    />
+                  )}
+                  <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">
+                    {product.type}
+                  </div>
                 </div>
                 <div>
                   <h4 className="text-2xl font-semibold text-white">{product.name}</h4>
