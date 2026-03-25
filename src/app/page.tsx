@@ -207,7 +207,7 @@ export default function Home() {
         <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 bg-cyan-400/20 blur-[120px]" />
       </div>
 
-      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-24 px-6 pb-20 pt-12 lg:px-10">
+      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-12 px-6 pb-20 pt-12 lg:px-10">
         <header className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur lg:flex-row lg:items-center lg:justify-between">
           <div>
             <p className="text-sm uppercase tracking-[0.3em] text-cyan-200">
