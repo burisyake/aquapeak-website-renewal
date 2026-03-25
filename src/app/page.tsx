@@ -2,20 +2,6 @@ import Image from "next/image";
 
 const products = [
   {
-    name: "SeedPocket",
-    type: "Web & Mobile",
-    description:
-      "家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる“暮らしのノート”。キッチンと畑をまたいで記録できます。",
-    highlights: [
-      "栽培スケジュールと収穫ログをレシピ候補と連動させて可視化",
-      "畑の状況は屋外でアプリから記録、栽培計画は自宅のPCから管理",
-      "Webとモバイルアプリを同時リリース",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/seed-pocket/id6756086853",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a6/f2/e2/a6f2e2e1-2919-f011-c4c1-152c35cf2d82/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
-  },
-  {
     name: "Asset Forecast",
     type: "Mobile App",
     description:
@@ -56,6 +42,20 @@ const products = [
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/20/3e/94/203e9431-5d34-7967-3dc5-ebe265de17b2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+  },
+  {
+    name: "SeedPocket",
+    type: "Web & Mobile",
+    description:
+      "家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる“暮らしのノート”。キッチンと畑をまたいで記録できます。",
+    highlights: [
+      "栽培スケジュールと収穫ログをレシピ候補と連動させて可視化",
+      "畑の状況は屋外でアプリから記録、栽培計画は自宅のPCから管理",
+      "Webとモバイルアプリを同時リリース",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/seed-pocket/id6756086853",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a6/f2/e2/a6f2e2e1-2919-f011-c4c1-152c35cf2d82/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "九九九！ 〜 3桁掛け算九九〜",
@@ -219,7 +219,7 @@ export default function Home() {
               モバイルアプリと Web サービスの両輪で、暮らしの意思決定をアップデートする自社プロダクトを研究・展開しています。
             </p>
           </div>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {products.map((product) => (
               <article
                 key={product.name}
