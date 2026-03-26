@@ -2,18 +2,18 @@ import Image from "next/image";
 
 const products = [
   {
-    name: "Asset Forecast",
+    name: "山コレクション",
     type: "Mobile App",
     description:
-      "資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。実績入力から将来シミュレーションまでスマホひとつで完結します。",
+      "百名山だけに限定せず、百低山・花の百名山など複数カテゴリを横断して管理できる登山管理アプリ。記録・検索・可視化・振り返りを一つの流れで使える設計にしました。",
     highlights: [
-      "晴れ・曇り・雨の天気マークで毎月の資産コンディションを可視化",
-      "50種類以上の指標・グラフを自由に配置できる分析画面",
-      "通信層での漏洩防止のため、データは端末内にのみ保存",
+      "百名山・百低山・花の百名山など複数カテゴリを一元管理",
+      "登山記録・達成状況・計画を可視化",
+      "百名山達成後も次のテーマへ自然に振り返りながら振り返り",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/02/fa/30/02fa307d-c2a1-72c7-2358-7ad6340ad3d6/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
+    href: "https://apps.apple.com/us/app/%E5%B1%B1%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6760900479",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f8/7d/6ef87d8d-04b1-6ab1-10df-76442d423ebb/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
   },
   {
     name: "Focus Pet - Habbit",
@@ -42,6 +42,20 @@ const products = [
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/us/app/book-echo-action-tip/id6759045118",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bd/93/1f/bd931fa0-1b49-8052-6cee-8997f9ceffad/AppIcon-1x_U007emarketing-0-6-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
+    name: "Asset Forecast",
+    type: "Mobile App",
+    description:
+      "資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。実績入力から将来シミュレーションまでスマホひとつで完結します。",
+    highlights: [
+      "晴れ・曇り・雨の天気マークで毎月の資産コンディションを可視化",
+      "50種類以上の指標・グラフを自由に配置できる分析画面",
+      "通信層での漏洩防止のため、データは端末内にのみ保存",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/02/fa/30/02fa307d-c2a1-72c7-2358-7ad6340ad3d6/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "麻雀クイズ！〜役・翻符・点数〜",
