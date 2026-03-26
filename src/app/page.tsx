@@ -51,7 +51,7 @@ const products = [
     highlights: [
       "晴れ・曇り・雨の天気マークで毎月の資産コンディションを可視化",
       "50種類以上の指標・グラフを自由に配置できる分析画面",
-      "通信層での漏洩防止のため、データは端末内にのみ保存",
+      "データは全て端末内にのみ保存",
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
