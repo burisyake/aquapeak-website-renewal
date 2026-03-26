@@ -349,6 +349,17 @@ export default function Home() {
                   <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">
                     {product.type}
                   </div>
+                  {product.href && (
+                    <div className="ml-auto flex-shrink-0 rounded-lg bg-white p-1">
+                      <Image
+                        src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(product.href)}`}
+                        alt={`QR code for ${product.name}`}
+                        width={50}
+                        height={50}
+                        unoptimized
+                      />
+                    </div>
+                  )}
                 </div>
                 <div>
                   <h4 className="text-2xl font-semibold text-white">{product.name}</h4>
