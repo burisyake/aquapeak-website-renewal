@@ -114,6 +114,20 @@ const products = [
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/09/7e/ad097e4f-38a2-9334-deb9-c87016cf3e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
+    name: "LuckyGames - Choice & Roulette",
+    type: "Mobile App",
+    description:
+      "日常・ビジネス・パーティーなど様々なシーンで意思決定をすばやく・公平に・楽しくサポートする多機能決断ツールアプリ。ルーレット・あみだくじ・爆弾ゲームなど6種類のミニゲームを搭載。",
+    highlights: [
+      "ルーレット・あみだくじ・爆弾・チーム分け・コイン・くじ引きの6ミニゲーム",
+      "英語・日本語・韓国語・中国語・ベトナム語の多言語対応",
+      "履歴機能で過去の結果をいつでも振り返り可能",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/luckygames-choice-roulette/id6760779611",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/00/76/d4007618-f771-3249-8ccb-ea5f1b1c9d2e/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
     name: "Word Pocket - Pet",
     type: "Mobile App",
     description:
@@ -196,7 +210,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "12+", label: "ローンチしたプロダクト" },
+  { value: "13+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
   { value: "1 週間", label: "平均リリースリードタイム" },
   { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
