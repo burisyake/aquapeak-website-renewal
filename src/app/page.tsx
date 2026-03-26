@@ -31,7 +31,7 @@ const products = [
   },
   {
     name: "Book Echo - Action Tip",
-    type: "Mobile App",
+    type: "Web & Mobile",
     description:
       "読んだ本の知識をアクションに変える読書管理アプリ。「読んで終わり」ではなく、実生活での変化につながる学びをサポートします。",
     highlights: [
