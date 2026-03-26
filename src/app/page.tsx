@@ -196,7 +196,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "11+", label: "ローンチしたプロダクト" },
+  { value: "12+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
   { value: "1 週間", label: "平均リリースリードタイム" },
   { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
