@@ -86,6 +86,20 @@ const products = [
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/20/3e/94/203e9431-5d34-7967-3dc5-ebe265de17b2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
+    name: "Kashikari: Loan & IOU Tracker",
+    type: "Mobile App",
+    description:
+      "友人や家族との少額の貸し借りをシンプルに記録・管理できる家計補助アプリ。名前・金額・メモ・日付だけで素早く記録し、未精算のやり取りを分かりやすく可視化します。",
+    highlights: [
+      "貸した・借りた履歴を相手ごとに整理して管理",
+      "期日設定や精算（部分返済・全額返済）に対応",
+      "データは端末内保存でアカウント登録不要",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/us/app/kashikari-loan-iou-tracker/id6762706658",
+    appIconUrl:"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/40/e5/b040e506-54fc-b1ec-d2c7-73b6fd664d09/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+  },
+  {
     name: "SeedPocket",
     type: "Web & Mobile",
     description:
@@ -210,7 +224,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "13+", label: "ローンチしたプロダクト" },
+  { value: "14+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
   { value: "1 週間", label: "平均リリースリードタイム" },
   { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
