@@ -546,9 +546,14 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="flex flex-col gap-2 border-t border-white/10 py-10 text-center text-sm text-slate-400 md:flex-row md:items-center md:justify-between md:text-left">
+        <footer className="flex flex-col gap-3 border-t border-white/10 py-10 text-center text-sm text-slate-400 md:flex-row md:items-center md:justify-between md:text-left">
           <span>© {new Date().getFullYear()} AquaPeak Inc.</span>
-          <span>プロダクトで、毎日の体験をアップデートする。</span>
+          <div className="flex flex-col items-center gap-2 md:items-end">
+            <span>プロダクトで、毎日の体験をアップデートする。</span>
+            <a href="/privacy-policy" className="text-cyan-200 transition hover:text-cyan-100">
+              プライバシーポリシー
+            </a>
+          </div>
         </footer>
       </div>
     </div>
