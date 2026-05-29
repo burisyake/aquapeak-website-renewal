@@ -2,6 +2,20 @@ import Image from "next/image";
 
 const products = [
   {
+    name: "3000 English Vocab with Pets",
+    type: "Mobile App",
+    description:
+      "ペットを育てながら英単語3,000語を習得するゲーミファイド学習アプリ。スマートレビューシステムと100種以上のペット収集で毎日の学習を習慣化します。",
+    highlights: [
+      "学習するたびにペットが成長・進化するインセンティブ設計",
+      "3,000の頻出英単語をスマートレビューで効率的に定着",
+      "タイムアタックゲームと100種以上のペット収集で継続をサポート",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/3000-english-vocab-with-pets/id6767876543",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/16/83/7b168307-e8cd-7ce6-98b1-9bdcf1b96bda/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+  },
+  {
     name: "山コレクション",
     type: "Mobile App",
     description:
@@ -12,8 +26,22 @@ const products = [
       "あなた好みの山がきっと見つかる",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/%E5%B1%B1%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6760900479",
+    href: "https://apps.apple.com/jp/app/%E5%B1%B1%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6760900479",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f8/7d/6ef87d8d-04b1-6ab1-10df-76442d423ebb/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
+  },
+  {
+    name: "Japan Aquarium Collection",
+    type: "Mobile App",
+    description:
+      "全国61の水族館を発見・訪問記録・収集できる水族館トラッキングアプリ。沖縄から北海道まで、9地域別に閲覧し旅行計画に役立てられます。",
+    highlights: [
+      "全国61水族館を地域・生き物種別で検索・整理",
+      "訪問済みをチェックしてコレクション進捗を管理",
+      "旅行計画と水族館めぐりを一つのアプリで完結",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/japan-aquarium-collection/id6766937137",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/05/af/c705af28-3bb1-8a3a-b6b0-f9cb1698b91d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
     name: "Focus Pet - Habbit",
@@ -26,7 +54,7 @@ const products = [
       "ゲーム感覦でTODO管理を楽しめる",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/focus-pet-habbit/id6759491280",
+    href: "https://apps.apple.com/jp/app/focus-pet-habbit/id6759491280",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/cd/c7/b0cdc758-0732-9009-160b-4ec004827650/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
   },
   {
@@ -40,7 +68,7 @@ const products = [
       "読書と実践のギャップを埋める構造化ノート機能",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/book-echo-action-tip/id6759045118",
+    href: "https://apps.apple.com/jp/app/book-echo-action-tip/id6759045118",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bd/93/1f/bd931fa0-1b49-8052-6cee-8997f9ceffad/AppIcon-1x_U007emarketing-0-6-0-85-220-0.png/512x512bb.jpg",
   },
   {
@@ -68,7 +96,7 @@ const products = [
       "履歴画面で正答率やスコア推移を振り返り可能",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
+    href: "https://apps.apple.com/jp/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/26/32/4c/26324cbe-403d-6954-a05c-06d3dcd57b26/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg",
   },
   {
@@ -82,7 +110,7 @@ const products = [
       "月別履歴とグラフ表示で支出傾向を確認",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
+    href: "https://apps.apple.com/jp/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/20/3e/94/203e9431-5d34-7967-3dc5-ebe265de17b2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
@@ -96,7 +124,7 @@ const products = [
       "データは端末内保存でアカウント登録不要",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/kashikari-loan-iou-tracker/id6762706658",
+    href: "https://apps.apple.com/jp/app/kashikari-loan-iou-tracker/id6762706658",
     appIconUrl:"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/40/e5/b040e506-54fc-b1ec-d2c7-73b6fd664d09/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
@@ -110,7 +138,7 @@ const products = [
       "Webとモバイルアプリを同時リリース",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/seed-pocket/id6756086853",
+    href: "https://apps.apple.com/jp/app/seed-pocket/id6756086853",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a6/f2/e2/a6f2e2e1-2919-f011-c4c1-152c35cf2d82/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
   },
   {
@@ -124,7 +152,7 @@ const products = [
       "カレンダーと成績グラフで継続状況と弱点を可視化",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
+    href: "https://apps.apple.com/jp/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/09/7e/ad097e4f-38a2-9334-deb9-c87016cf3e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
   },
   {
@@ -138,7 +166,7 @@ const products = [
       "履歴機能で過去の結果をいつでも振り返り可能",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/luckygames-choice-roulette/id6760779611",
+    href: "https://apps.apple.com/jp/app/luckygames-choice-roulette/id6760779611",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/00/76/d4007618-f771-3249-8ccb-ea5f1b1c9d2e/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
   },
   {
@@ -152,7 +180,7 @@ const products = [
       "ゲーム感覦で毎日の学習を継続できる仕組み",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/word-pocket-pet/id6759867409",
+    href: "https://apps.apple.com/jp/app/word-pocket-pet/id6759867409",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2a/c5/2d/2ac52de2-f865-d459-cfa4-a2b304945ec9/AppIcon-1x_U007epad-0-1-85-220-0.png/512x512bb.jpg",
   },
   {
@@ -166,7 +194,7 @@ const products = [
       "美しいUIで家の在庫を一元管理",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/stock-nest-management/id6760417366",
+    href: "https://apps.apple.com/jp/app/stock-nest-management/id6760417366",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/76/fd/bb/76fdbb5f-c352-7ed5-97f7-92f5b6c51bc7/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
   },
   {
@@ -180,7 +208,7 @@ const products = [
       "飲み会・パーティーの罰ゲームに最適",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
+    href: "https://apps.apple.com/jp/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e2/e8/cb/e2e8cb46-f90c-b0d5-b9ae-fbd87c093c2e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
   },
   {
@@ -194,8 +222,22 @@ const products = [
       "仕事・学習効率の改善に特化したシンプルなUI",
     ],
     linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/us/app/pomodoro-tasktic/id6743796326",
+    href: "https://apps.apple.com/jp/app/pomodoro-tasktic/id6743796326",
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b3/4e/f6/b34ef6eb-6717-9238-293a-cba0fd77b5c1/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+  },
+  {
+    name: "The Lake Collection",
+    type: "Mobile App",
+    description:
+      "日本全国の湖を発見・追跡・探索するための統合アプリ。百名湖・ダム湖・カルデラ湖など多彩なカテゴリを地図と訪問記録で管理できます。",
+    highlights: [
+      "百名湖・ダム湖・カルデラ湖など複数カテゴリを一元管理",
+      "地図表示と訪問チェックで探索進捗を可視化",
+      "ドライブ・観光・自然探索の旅行計画に最適",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/the-lake-collection/id6766865900",
+    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c6/1b/fe/c61bfe9b-7e64-b450-e332-3ed8d40e54a7/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
   },
 ];
 
@@ -224,7 +266,7 @@ const services = [
 ];
 
 const stats = [
-  { value: "14+", label: "ローンチしたプロダクト" },
+  { value: "17+", label: "ローンチしたプロダクト" },
   { value: "4.9/5", label: "平均アプリ評価" },
   { value: "1 週間", label: "平均リリースリードタイム" },
   { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
