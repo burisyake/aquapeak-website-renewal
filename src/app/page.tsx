@@ -2,7 +2,7 @@ import Image from "next/image";
 
 const products = [
   {
-    name: "3000 English Vocab with Pets",
+    name: "3000英単語-ペットと学ぶ英語学習",
     type: "Mobile App",
     description:
       "ペットを育てながら英単語3,000語を習得するゲーミファイド学習アプリ。スマートレビューシステムと100種以上のペット収集で毎日の学習を習慣化します。",
@@ -30,7 +30,7 @@ const products = [
     appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f8/7d/6ef87d8d-04b1-6ab1-10df-76442d423ebb/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
   },
   {
-    name: "Japan Aquarium Collection",
+    name: "水族館コレクション",
     type: "Mobile App",
     description:
       "全国61の水族館を発見・訪問記録・収集できる水族館トラッキングアプリ。沖縄から北海道まで、9地域別に閲覧し旅行計画に役立てられます。",
