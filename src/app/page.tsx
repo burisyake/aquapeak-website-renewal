@@ -1,5 +1,17 @@
 import Image from "next/image";
 
+async function fetchAppIconUrl(appId: string): Promise<string | null> {
+  try {
+    const res = await fetch(`https://itunes.apple.com/lookup?id=${appId}`, {
+      next: { revalidate: 86400 },
+    });
+    const data = await res.json();
+    return (data.results?.[0]?.artworkUrl512 as string) ?? null;
+  } catch {
+    return null;
+  }
+}
+
 const products = [
   {
     name: "3000英単語-ペットと学ぶ英語学習",
@@ -13,7 +25,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/3000-english-vocab-with-pets/id6767876543",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/7b/16/83/7b168307-e8cd-7ce6-98b1-9bdcf1b96bda/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+    appId: "6767876543",
   },
   {
     name: "山コレクション",
@@ -27,7 +39,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/%E5%B1%B1%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6760900479",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/6e/f8/7d/6ef87d8d-04b1-6ab1-10df-76442d423ebb/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
+    appId: "6760900479",
   },
   {
     name: "水族館コレクション",
@@ -41,7 +53,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/japan-aquarium-collection/id6766937137",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c7/05/af/c705af28-3bb1-8a3a-b6b0-f9cb1698b91d/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    appId: "6766937137",
   },
   {
     name: "Focus Pet - Habbit",
@@ -55,7 +67,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/focus-pet-habbit/id6759491280",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/cd/c7/b0cdc758-0732-9009-160b-4ec004827650/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+    appId: "6759491280",
   },
   {
     name: "Book Echo - Action Tip",
@@ -69,7 +81,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/book-echo-action-tip/id6759045118",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/bd/93/1f/bd931fa0-1b49-8052-6cee-8997f9ceffad/AppIcon-1x_U007emarketing-0-6-0-85-220-0.png/512x512bb.jpg",
+    appId: "6759045118",
   },
   {
     name: "Asset Forecast",
@@ -83,7 +95,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/02/fa/30/02fa307d-c2a1-72c7-2358-7ad6340ad3d6/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
+    appId: "6753914294",
   },
   {
     name: "麻雀クイズ！〜役・翻符・点数〜",
@@ -97,7 +109,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/26/32/4c/26324cbe-403d-6954-a05c-06d3dcd57b26/AppIcon-0-0-1x_U007emarketing-0-5-85-220.png/512x512bb.jpg",
+    appId: "6759558674",
   },
   {
     name: "ふたり家計",
@@ -111,7 +123,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/20/3e/94/203e9431-5d34-7967-3dc5-ebe265de17b2/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    appId: "6760020562",
   },
   {
     name: "Kashikari: Loan & IOU Tracker",
@@ -125,7 +137,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/kashikari-loan-iou-tracker/id6762706658",
-    appIconUrl:"https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/b0/40/e5/b040e506-54fc-b1ec-d2c7-73b6fd664d09/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    appId: "6762706658",
   },
   {
     name: "SeedPocket",
@@ -139,7 +151,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/seed-pocket/id6756086853",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/a6/f2/e2/a6f2e2e1-2919-f011-c4c1-152c35cf2d82/AppIcon-0-0-1x_U007emarketing-0-6-0-85-220.png/512x512bb.jpg",
+    appId: "6756086853",
   },
   {
     name: "九九九！ 〜 3桁掛け算九九〜",
@@ -153,7 +165,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/ad/09/7e/ad097e4f-38a2-9334-deb9-c87016cf3e7a/AppIcon-0-0-1x_U007emarketing-0-8-0-85-220.png/512x512bb.jpg",
+    appId: "6759827804",
   },
   {
     name: "LuckyGames - Choice & Roulette",
@@ -167,7 +179,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/luckygames-choice-roulette/id6760779611",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/d4/00/76/d4007618-f771-3249-8ccb-ea5f1b1c9d2e/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+    appId: "6760779611",
   },
   {
     name: "Word Pocket - Pet",
@@ -181,7 +193,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/word-pocket-pet/id6759867409",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple221/v4/2a/c5/2d/2ac52de2-f865-d459-cfa4-a2b304945ec9/AppIcon-1x_U007epad-0-1-85-220-0.png/512x512bb.jpg",
+    appId: "6759867409",
   },
   {
     name: "Stock Nest - Management",
@@ -195,7 +207,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/stock-nest-management/id6760417366",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/76/fd/bb/76fdbb5f-c352-7ed5-97f7-92f5b6c51bc7/AppIcon-1x_U007emarketing-0-8-0-85-220-0.png/512x512bb.jpg",
+    appId: "6760417366",
   },
   {
     name: "ドキドキスイッチ",
@@ -209,7 +221,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/e2/e8/cb/e2e8cb46-f90c-b0d5-b9ae-fbd87c093c2e/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+    appId: "6744993926",
   },
   {
     name: "Pomodoro TaskTic",
@@ -223,7 +235,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/pomodoro-tasktic/id6743796326",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/b3/4e/f6/b34ef6eb-6717-9238-293a-cba0fd77b5c1/AppIcon-0-0-1x_U007epad-0-1-85-220.png/512x512bb.jpg",
+    appId: "6743796326",
   },
   {
     name: "The Lake Collection",
@@ -237,7 +249,7 @@ const products = [
     ],
     linkLabel: "App Store で見る",
     href: "https://apps.apple.com/jp/app/the-lake-collection/id6766865900",
-    appIconUrl: "https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/c6/1b/fe/c61bfe9b-7e64-b450-e332-3ed8d40e54a7/AppIcon-0-0-1x_U007emarketing-0-8-0-P3-85-220.png/512x512bb.jpg",
+    appId: "6766865900",
   },
 ];
 
@@ -296,7 +308,11 @@ const timeline = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const iconUrls = await Promise.all(
+    products.map((p) => fetchAppIconUrl(p.appId))
+  );
+
   return (
     <div className="relative isolate">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -387,15 +403,17 @@ export default function Home() {
             </p>
           </div>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product) => (
+            {products.map((product, i) => {
+              const appIconUrl = iconUrls[i];
+              return (
               <article
                 key={product.name}
                 className="relative flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
               >
                 <div className="flex items-center gap-4">
-                  {product.appIconUrl && (
+                  {appIconUrl && (
                     <Image
-                      src={product.appIconUrl}
+                      src={appIconUrl}
                       alt={`${product.name} icon`}
                       width={56}
                       height={56}
@@ -441,7 +459,8 @@ export default function Home() {
                   <span>↗</span>
                 </a>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
 
