@@ -126,7 +126,7 @@ const products = [
     appId: "6760020562",
   },
   {
-    name: "Kashikari: Loan & IOU Tracker",
+    name: "kashikari-お金の貸し借り記録アプリ",
     type: "Mobile App",
     description:
       "友人や家族との少額の貸し借りをシンプルに記録・管理できる家計補助アプリ。名前・金額・メモ・日付だけで素早く記録し、未精算のやり取りを分かりやすく可視化します。",
