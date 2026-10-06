@@ -14,6 +14,104 @@ async function fetchAppIconUrl(appId: string): Promise<string | null> {
 
 const products = [
   {
+    name: "スペイン語文法: Grammar Paws",
+    type: "Mobile App",
+    description:
+      "ペットを育てながらスペイン語文法を学べる学習アプリ。CEFR A1〜C2とビジネスの900項目を、母語→スペイン語の順で直感的に理解できます。",
+    highlights: [
+      "CEFR A1〜C2・ビジネスの900文法項目を収録、動詞には不定詞注釈付き",
+      "間隔反復（SRS）とクイズ・対戦ゲームの3つの学習モード",
+      "100種類のペット育成・図鑑収集で学習を習慣化",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E3%82%B9%E3%83%9A%E3%82%A4%E3%83%B3%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6816064767",
+    appId: "6816064767",
+  },
+  {
+    name: "韓国語単語を学ぶ: Vocab Paws",
+    type: "Mobile App",
+    description:
+      "ペットを育てながら韓国語単語を学べる学習アプリ。TOPIK 1〜6級とビジネスの3,000語を、実際の発音表記とともに習得できます。",
+    highlights: [
+      "TOPIK 1〜6級・ビジネスの3,000語と例文3,000文を収録",
+      "濃音化・鼻音化・連音などの発音表記で聞き取りにも強く",
+      "全3,000語無料、間隔反復とペット育成で継続をサポート",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E3%82%92%E5%AD%A6%E3%81%B6-vocab-paws/id6805960002",
+    appId: "6805960002",
+  },
+  {
+    name: "韓国語文法: Grammar Paws",
+    type: "Mobile App",
+    description:
+      "ペットを育てながら韓国語文法を学べる学習アプリ。TOPIK 1〜6級とビジネスの900項目を、パッチムの有無まで明記した接続ルールで理解できます。",
+    highlights: [
+      "TOPIK 1〜6級・ビジネスの900文法項目と例文1,224文を収録",
+      "ハングルのローマ字表記とパッチム別の接続ルール",
+      "間隔反復（SRS）・3つの学習モード・ペット育成で習慣化",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E9%9F%93%E5%9B%BD%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6805949109",
+    appId: "6805949109",
+  },
+  {
+    name: "日本語単語: Vocabulary Paws",
+    type: "Mobile App",
+    description:
+      "日本語学習者向けに、ペットを育てながらJLPT N5〜N1とビジネスの3,000語を習得できる単語学習アプリ。15言語に対応しています。",
+    highlights: [
+      "JLPT N5〜N1・ビジネスの3,000語と例文3,000文を収録",
+      "ふりがな表示切り替えと15言語の母語解説",
+      "間隔反復（SRS）と100種類のペット収集で継続をサポート",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%8D%98%E8%AA%9E-vocabulary-paws/id6799179231",
+    appId: "6799179231",
+  },
+  {
+    name: "日本語文法: Grammar Paws",
+    type: "Mobile App",
+    description:
+      "日本語学習者向けに、ペットを育てながらJLPT N5〜N1とビジネスの文法906項目を学べるアプリ。母語→日本語の順で接続ルールを理解できます。",
+    highlights: [
+      "JLPT N5〜N1・ビジネスの906文法項目と例文973文を収録",
+      "ふりがな表示切り替えと15言語の母語解説",
+      "フラッシュカード・クイズ・対戦ゲームの3つの学習モード",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E6%97%A5%E6%9C%AC%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6798627790",
+    appId: "6798627790",
+  },
+  {
+    name: "サブスク管理: SubTracks",
+    type: "Mobile App",
+    description:
+      "契約中のサブスクや毎月の固定費・支払い方法をかんたんに登録・管理し、無駄な出費をなくすための固定費管理アプリ。",
+    highlights: [
+      "人気サービスのプリセットからワンタップで登録",
+      "請求日・無料体験の解約期限を事前にプッシュ通知",
+      "支払い方法別・カテゴリ別の円グラフで固定費を可視化",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86-subtracks/id6796983012",
+    appId: "6796983012",
+  },
+  {
+    name: "1日あたりの利用コスト: UsePace",
+    type: "Mobile App",
+    description:
+      "モノを使い始めた日と使い終わった日を記録するだけで、1日あたりのコストと消費ペースを自動計算する消費ペース管理アプリ。",
+    highlights: [
+      "ワンタップで使用開始・終了を記録し日割りコストを自動計算",
+      "過去実績から1ヶ月の必要量を予測してまとめ買いを最適化",
+      "アカウント登録不要・完全オフラインでプライバシーも安心",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/1%E6%97%A5%E3%81%82%E3%81%9F%E3%82%8A%E3%81%AE%E5%88%A9%E7%94%A8%E3%82%B3%E3%82%B9%E3%83%88-usepace/id6796442878",
+    appId: "6796442878",
+  },
+  {
     name: "3000英単語-ペットと学ぶ英語学習",
     type: "Mobile App",
     description:
