@@ -14,6 +14,62 @@ async function fetchAppIconUrl(appId: string): Promise<string | null> {
 
 const products = [
   {
+    name: "ぽかぽか水族館：放置で育つ癒しの経営ゲーム",
+    type: "Mobile App",
+    description:
+      "小さな水槽ひとつから始まる、癒しの水族館経営ゲーム。生き物を集めて水槽を並べ、館内をかざって、にぎやかな水族館へ育てます。",
+    highlights: [
+      "メダカからジンベエザメまで、生き物を集めて図鑑を完成",
+      "5種類の水槽と設備を自由に配置して自分だけのレイアウトに",
+      "放置中も営業継続、ショーや季節イベントで来場者アップ",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E3%81%BD%E3%81%8B%E3%81%BD%E3%81%8B%E6%B0%B4%E6%97%8F%E9%A4%A8-%E6%94%BE%E7%BD%AE%E3%81%A7%E8%82%B2%E3%81%A4%E7%99%92%E3%81%97%E3%81%AE%E7%B5%8C%E5%96%B6%E3%82%B2%E3%83%BC%E3%83%A0/id6819514855",
+    appId: "6819514855",
+  },
+  {
+    name: "漢字将棋対戦：漢字で戦う将棋バトル",
+    type: "Mobile App",
+    description:
+      "漢字の「意味」がそのまま駒の力になる、将棋ライクな対戦ボードゲーム。漢字を召喚・移動して相手の「王」を討ち取ります。",
+    highlights: [
+      "95種類の漢字それぞれの意味から生まれた動きと能力",
+      "熟語になる漢字を隣り合わせるとパワーアップ（67種類）",
+      "CPU対戦と1台で向かい合う2人対戦、盤サイズも3種類",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E6%BC%A2%E5%AD%97%E5%B0%86%E6%A3%8B%E5%AF%BE%E6%88%A6-%E6%BC%A2%E5%AD%97%E3%81%A7%E6%88%A6%E3%81%86%E5%B0%86%E6%A3%8B%E3%83%90%E3%83%88%E3%83%AB/id6816810778",
+    appId: "6816810778",
+  },
+  {
+    name: "収入プランナー 〜目標年収シミュレーター〜",
+    type: "Mobile App",
+    description:
+      "「今いくらか」ではなく「これからどう上げるか」を設計する収入計画アプリ。目標年収を決めると、そこまでの道のりを自動で描きます。",
+    highlights: [
+      "目標年収から達成年を逆算し、年ごとの計画をグラフ化",
+      "昇給率を変えた将来収入の比較と収入源ごとの内訳管理",
+      "データは端末内保存、アカウント登録不要",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E5%8F%8E%E5%85%A5%E3%83%97%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC-%E7%9B%AE%E6%A8%99%E5%B9%B4%E5%8F%8E%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC/id6807355355",
+    appId: "6807355355",
+  },
+  {
+    name: "動物園コレクションー全国めぐり記録",
+    type: "Mobile App",
+    description:
+      "全国54の動物園への来園をスタンプラリー感覚で記録・管理できる、動物園好きのためのアプリ。",
+    highlights: [
+      "来園済・予定・未訪問を全国マップで色分け表示",
+      "達成率・地方別・動物カテゴリ別など多彩な統計",
+      "パンダ・コアラなど20種類の動物カテゴリで施設を検索",
+    ],
+    linkLabel: "App Store で見る",
+    href: "https://apps.apple.com/jp/app/%E5%8B%95%E7%89%A9%E5%9C%92%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BC%E5%85%A8%E5%9B%BD%E3%82%81%E3%81%90%E3%82%8A%E8%A8%98%E9%8C%B2/id6776901519",
+    appId: "6776901519",
+  },
+  {
     name: "スペイン語文法: Grammar Paws",
     type: "Mobile App",
     description:
