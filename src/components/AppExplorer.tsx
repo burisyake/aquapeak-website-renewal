@@ -18,7 +18,13 @@ export function AppExplorer({ apps }: { apps: AppWithIcon[] }) {
     return c;
   }, [apps]);
 
-  const filtered = filter === "all" ? apps : apps.filter((a) => a.category === filter);
+  // 「すべて」はジャンル順にまとめ、ジャンル内は apps.ts の並び順のまま
+  const sorted = useMemo(() => {
+    const rank = Object.fromEntries(categories.map((c, i) => [c.id, i]));
+    return [...apps].sort((a, b) => rank[a.category] - rank[b.category]);
+  }, [apps]);
+
+  const filtered = filter === "all" ? sorted : sorted.filter((a) => a.category === filter);
   const visible = filter === "all" && !expanded ? filtered.slice(0, INITIAL) : filtered;
 
   const tabs = [{ id: "all" as const, label: "すべて" }, ...categories];
