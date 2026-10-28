@@ -90,7 +90,7 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
   );
 
   return (
-    <section className="relative overflow-hidden pt-28 md:pt-36">
+    <section className="relative overflow-hidden pt-24 md:pt-24">
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute -top-40 -right-40 h-[560px] w-[560px] rounded-full bg-aqua-light/60 blur-3xl" />
         <div className="absolute top-60 -left-40 h-[420px] w-[420px] rounded-full bg-[#ffe3d9]/70 blur-3xl" />
