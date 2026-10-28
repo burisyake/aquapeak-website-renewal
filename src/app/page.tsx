@@ -1,6 +1,6 @@
 import { AppExplorer } from "@/components/AppExplorer";
 import { AppIcon } from "@/components/AppIcon";
-import { categories, featuredCopy, featuredIds } from "@/data/apps";
+import { categories, featuredCopy, featuredIds, heroColumns } from "@/data/apps";
 import { getAppsWithIcons, type AppWithIcon } from "@/lib/itunes";
 
 const CONTACT_EMAIL = "assetforecast@gmail.com";
@@ -83,7 +83,11 @@ function Wave({ className = "", fill }: { className?: string; fill: string }) {
 
 function Hero({ apps }: { apps: AppWithIcon[] }) {
   const withIcon = apps.filter((a) => a.icon);
-  const cols = [withIcon.slice(0, 3), withIcon.slice(3, 6), withIcon.slice(6, 9)];
+  const cols = heroColumns.map((col) =>
+    col
+      .map((id) => apps.find((a) => a.appId === id))
+      .filter((a): a is AppWithIcon => Boolean(a)),
+  );
 
   return (
     <section className="relative overflow-hidden pt-28 md:pt-36">
@@ -182,22 +186,49 @@ function IconMarquee({ apps }: { apps: AppWithIcon[] }) {
   if (apps.length === 0) return null;
   const half = Math.ceil(apps.length / 2);
   const rows = [apps.slice(0, half), apps.slice(half)];
+  const ITEM = 88; // アイコン72px + 間隔16px
+  const MIN_WIDTH = 2800; // 大きな画面でも隙間が出ない長さ
+
   return (
-    <div
-      aria-hidden="true"
-      className="mt-20 space-y-4 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)] md:mt-28"
-    >
-      {rows.map((row, ri) => (
-        <div key={ri} className="flex overflow-hidden">
-          <div
-            className={`flex w-max shrink-0 gap-4 ${ri === 0 ? "animate-marquee" : "animate-marquee-rev"}`}
-          >
-            {[...row, ...row].map((app, i) => (
-              <AppIcon key={`${app.appId}-${i}`} src={app.icon} name={app.name} size={72} />
-            ))}
+    <div className="mt-20 space-y-4 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)] md:mt-28">
+      {rows.map((row, ri) => {
+        // 1周分が画面幅より長くなるまで繰り返し、それを2つ並べて -50% 移動でループさせる
+        const repeat = Math.max(1, Math.ceil(MIN_WIDTH / (row.length * ITEM)));
+        const loop = Array.from({ length: repeat }, () => row).flat();
+        const track = [...loop, ...loop];
+        const duration = (loop.length * ITEM) / 40; // 約40px/秒
+
+        return (
+          <div key={ri} className="group flex overflow-hidden">
+            <div
+              className={`flex w-max shrink-0 group-hover:[animation-play-state:paused] ${
+                ri === 0 ? "animate-marquee" : "animate-marquee-rev"
+              }`}
+              style={{ animationDuration: `${duration}s` }}
+            >
+              {track.map((app, i) => {
+                // 読み上げ・Tab移動は最初の1周分だけ
+                const isCopy = i >= row.length;
+                return (
+                  <a
+                    key={`${app.appId}-${i}`}
+                    href={app.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label={isCopy ? undefined : `${app.name}（App Store）`}
+                    aria-hidden={isCopy || undefined}
+                    tabIndex={isCopy ? -1 : undefined}
+                    title={app.name}
+                    className="shrink-0 pr-4 transition-transform duration-200 hover:-translate-y-1 hover:scale-105"
+                  >
+                    <AppIcon src={app.icon} name={app.name} size={72} />
+                  </a>
+                );
+              })}
+            </div>
           </div>
-        </div>
-      ))}
+        );
+      })}
     </div>
   );
 }
