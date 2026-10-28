@@ -112,7 +112,7 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
           </h1>
           <p className="mt-8 max-w-xl text-base leading-8 text-ink-soft md:text-lg md:leading-9">
             AquaPeak は、学び・お金・暮らし・おでかけ・遊びの領域で、
-            日々の小さな「めんどう」をほどくアプリを自社で企画・開発・運営しているプロダクトスタジオです。
+            日々の小さな「めんどう」をほどくアプリを自分たちで企画・開発・運営しているプロダクトスタジオです。
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a
