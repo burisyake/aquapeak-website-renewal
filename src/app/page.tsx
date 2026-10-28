@@ -128,8 +128,40 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
               私たちについて
             </a>
           </div>
+        </div>
 
-          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8">
+        <div className="mx-auto w-full lg:max-w-lg">
+          {/* アイコンが浮かぶビジュアル（PCのみ） */}
+          <div aria-hidden="true" className="relative hidden lg:block">
+            <div className="absolute inset-8 rounded-[48px] bg-gradient-to-br from-white to-mist shadow-[0_40px_80px_-40px_rgba(11,29,46,0.35)]" />
+            <div className="relative grid grid-cols-3 gap-6 p-14">
+              {cols.map((col, ci) => (
+                <div
+                  key={ci}
+                  className={`flex flex-col gap-6 ${ci === 1 ? "translate-y-10" : ""}`}
+                >
+                  {col.map((app, i) => (
+                    <div
+                      key={app.appId}
+                      className="animate-float"
+                      style={{ animationDelay: `${(ci * 3 + i) * -0.8}s` }}
+                    >
+                      <AppIcon
+                        src={app.icon}
+                        name={app.name}
+                        size={104}
+                        priority
+                        className="shadow-[0_20px_40px_-16px_rgba(11,29,46,0.4)]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* 数字（スマホはボタンの下、PCはアイコンの下に表示） */}
+          <dl className="grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8 lg:mx-8 lg:mt-6 lg:max-w-none lg:border-t-0 lg:pt-0 lg:text-center">
             {[
               { value: String(apps.length), unit: "本", label: "リリースしたアプリ" },
               { value: String(categories.length), unit: "", label: "ジャンル" },
@@ -145,35 +177,6 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
               </div>
             ))}
           </dl>
-        </div>
-
-        {/* アイコンが浮かぶビジュアル */}
-        <div aria-hidden="true" className="relative mx-auto hidden w-full max-w-lg lg:block">
-          <div className="absolute inset-8 rounded-[48px] bg-gradient-to-br from-white to-mist shadow-[0_40px_80px_-40px_rgba(11,29,46,0.35)]" />
-          <div className="relative grid grid-cols-3 gap-6 p-14">
-            {cols.map((col, ci) => (
-              <div
-                key={ci}
-                className={`flex flex-col gap-6 ${ci === 1 ? "translate-y-10" : ""}`}
-              >
-                {col.map((app, i) => (
-                  <div
-                    key={app.appId}
-                    className="animate-float"
-                    style={{ animationDelay: `${(ci * 3 + i) * -0.8}s` }}
-                  >
-                    <AppIcon
-                      src={app.icon}
-                      name={app.name}
-                      size={104}
-                      priority
-                      className="shadow-[0_20px_40px_-16px_rgba(11,29,46,0.4)]"
-                    />
-                  </div>
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
       </div>
 
