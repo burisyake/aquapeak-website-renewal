@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { categories, type CategoryId } from "@/data/apps";
+import { categories, genreOrder, type CategoryId } from "@/data/apps";
 import type { AppWithIcon } from "@/lib/itunes";
 import { AppIcon } from "./AppIcon";
 
@@ -12,19 +12,30 @@ export function AppExplorer({ apps }: { apps: AppWithIcon[] }) {
   const [filter, setFilter] = useState<CategoryId | "all">("all");
   const [expanded, setExpanded] = useState(false);
 
-  const counts = useMemo(() => {
-    const c: Record<string, number> = { all: apps.length };
-    for (const a of apps) c[a.category] = (c[a.category] ?? 0) + 1;
-    return c;
+  // ジャンルごとの一覧（genreOrder の順。他ジャンルのアプリも重複掲載できる）
+  const byGenre = useMemo(() => {
+    const byId = new Map(apps.map((a) => [a.appId, a]));
+    const lists = {} as Record<CategoryId, AppWithIcon[]>;
+    for (const c of categories) {
+      const ids = genreOrder[c.id] ?? [];
+      const listed = ids.flatMap((id) => byId.get(id) ?? []);
+      // リストに入れ忘れたアプリも、本来のジャンルの末尾には表示する
+      const missing = apps.filter((a) => a.category === c.id && !ids.includes(a.appId));
+      lists[c.id] = [...listed, ...missing];
+    }
+    return lists;
   }, [apps]);
 
-  // 「すべて」はジャンル順にまとめ、ジャンル内は apps.ts の並び順のまま
-  const sorted = useMemo(() => {
-    const rank = Object.fromEntries(categories.map((c, i) => [c.id, i]));
-    return [...apps].sort((a, b) => rank[a.category] - rank[b.category]);
-  }, [apps]);
+  // 「すべて」はジャンル順に並べ、各アプリは本来のジャンルで1回だけ表示
+  const all = useMemo(
+    () => categories.flatMap((c) => byGenre[c.id].filter((a) => a.category === c.id)),
+    [byGenre],
+  );
 
-  const filtered = filter === "all" ? sorted : sorted.filter((a) => a.category === filter);
+  const counts: Record<string, number> = { all: all.length };
+  for (const c of categories) counts[c.id] = byGenre[c.id].length;
+
+  const filtered = filter === "all" ? all : byGenre[filter];
   const visible = filter === "all" && !expanded ? filtered.slice(0, INITIAL) : filtered;
 
   const tabs = [{ id: "all" as const, label: "すべて" }, ...categories];
