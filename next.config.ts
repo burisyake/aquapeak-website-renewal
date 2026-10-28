@@ -2,16 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "is1-ssl.mzstatic.com",
-      },
-      {
-        protocol: "https",
-        hostname: "api.qrserver.com",
-      },
-    ],
+    // App Store のアイコン画像（is1-ssl / is2-ssl ... の複数ホストがある）
+    remotePatterns: [{ protocol: "https", hostname: "*.mzstatic.com" }],
   },
 };
 

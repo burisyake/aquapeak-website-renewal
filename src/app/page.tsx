@@ -1,790 +1,483 @@
-import Image from "next/image";
+import { AppExplorer } from "@/components/AppExplorer";
+import { AppIcon } from "@/components/AppIcon";
+import { categories, featuredCopy, featuredIds } from "@/data/apps";
+import { getAppsWithIcons, type AppWithIcon } from "@/lib/itunes";
 
-async function fetchAppIconUrl(appId: string): Promise<string | null> {
-  try {
-    const res = await fetch(`https://itunes.apple.com/lookup?id=${appId}`, {
-      next: { revalidate: 86400 },
-    });
-    const data = await res.json();
-    return (data.results?.[0]?.artworkUrl512 as string) ?? null;
-  } catch {
-    return null;
-  }
+const CONTACT_EMAIL = "assetforecast@gmail.com";
+
+const principles = [
+  {
+    no: "01",
+    title: "ひとつの課題に、ひとつのアプリ",
+    text: "あれもこれもと詰め込まず、解きたい「めんどう」をひとつに絞る。だから迷わず使えて、すぐに手放せない道具になります。",
+  },
+  {
+    no: "02",
+    title: "データは、あなたの手元に",
+    text: "多くのアプリで、データは端末内にだけ保存し、アカウント登録も不要にしています。安心して、今日から気軽に使えるように。",
+  },
+  {
+    no: "03",
+    title: "続けたくなる仕掛けを",
+    text: "ペットを育てる、全国をめぐって集める、天気マークで眺める。記録や学習が「楽しみ」に変わる工夫を、どのアプリにも。",
+  },
+];
+
+const steps = [
+  {
+    no: "01",
+    en: "Find",
+    title: "見つける",
+    text: "自分たちや身近な人の「ちょっと困った」を出発点に、本当に解くべき課題をひとつに絞り込みます。",
+  },
+  {
+    no: "02",
+    en: "Build",
+    title: "つくる",
+    text: "必要な機能だけを素早く形にして、まずはストアに出す。企画からデザイン、開発までを同じチームで行います。",
+  },
+  {
+    no: "03",
+    en: "Grow",
+    title: "育てる",
+    text: "レビューや使われ方から学び、アップデートを重ねる。長く使ってもらえるアプリへ、少しずつ磨き続けます。",
+  },
+];
+
+const toneClass: Record<string, { panel: string; dot: string }> = {
+  aqua: { panel: "from-aqua-light via-mist to-white", dot: "bg-aqua" },
+  coral: { panel: "from-[#ffd9cc] via-[#fff1ec] to-white", dot: "bg-coral" },
+  leaf: { panel: "from-[#cdebd9] via-[#eef8f2] to-white", dot: "bg-leaf" },
+};
+
+function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  return (
+    <p
+      className={`flex items-center gap-3 font-display text-sm font-semibold tracking-[0.2em] uppercase ${
+        light ? "text-aqua-light" : "text-aqua-deep"
+      }`}
+    >
+      <span className={`h-px w-8 ${light ? "bg-aqua-light" : "bg-aqua"}`} />
+      {children}
+    </p>
+  );
 }
 
-const products = [
-  {
-    name: "ぽかぽか水族館：放置で育つ癒しの経営ゲーム",
-    type: "Mobile App",
-    description:
-      "小さな水槽ひとつから始まる、癒しの水族館経営ゲーム。生き物を集めて水槽を並べ、館内をかざって、にぎやかな水族館へ育てます。",
-    highlights: [
-      "メダカからジンベエザメまで、生き物を集めて図鑑を完成",
-      "5種類の水槽と設備を自由に配置して自分だけのレイアウトに",
-      "放置中も営業継続、ショーや季節イベントで来場者アップ",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E3%81%BD%E3%81%8B%E3%81%BD%E3%81%8B%E6%B0%B4%E6%97%8F%E9%A4%A8-%E6%94%BE%E7%BD%AE%E3%81%A7%E8%82%B2%E3%81%A4%E7%99%92%E3%81%97%E3%81%AE%E7%B5%8C%E5%96%B6%E3%82%B2%E3%83%BC%E3%83%A0/id6819514855",
-    appId: "6819514855",
-  },
-  {
-    name: "漢字将棋対戦：漢字で戦う将棋バトル",
-    type: "Mobile App",
-    description:
-      "漢字の「意味」がそのまま駒の力になる、将棋ライクな対戦ボードゲーム。漢字を召喚・移動して相手の「王」を討ち取ります。",
-    highlights: [
-      "95種類の漢字それぞれの意味から生まれた動きと能力",
-      "熟語になる漢字を隣り合わせるとパワーアップ（67種類）",
-      "CPU対戦と1台で向かい合う2人対戦、盤サイズも3種類",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E6%BC%A2%E5%AD%97%E5%B0%86%E6%A3%8B%E5%AF%BE%E6%88%A6-%E6%BC%A2%E5%AD%97%E3%81%A7%E6%88%A6%E3%81%86%E5%B0%86%E6%A3%8B%E3%83%90%E3%83%88%E3%83%AB/id6816810778",
-    appId: "6816810778",
-  },
-  {
-    name: "収入プランナー 〜目標年収シミュレーター〜",
-    type: "Mobile App",
-    description:
-      "「今いくらか」ではなく「これからどう上げるか」を設計する収入計画アプリ。目標年収を決めると、そこまでの道のりを自動で描きます。",
-    highlights: [
-      "目標年収から達成年を逆算し、年ごとの計画をグラフ化",
-      "昇給率を変えた将来収入の比較と収入源ごとの内訳管理",
-      "データは端末内保存、アカウント登録不要",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E5%8F%8E%E5%85%A5%E3%83%97%E3%83%A9%E3%83%B3%E3%83%8A%E3%83%BC-%E7%9B%AE%E6%A8%99%E5%B9%B4%E5%8F%8E%E3%82%B7%E3%83%9F%E3%83%A5%E3%83%AC%E3%83%BC%E3%82%BF%E3%83%BC/id6807355355",
-    appId: "6807355355",
-  },
-  {
-    name: "動物園コレクションー全国めぐり記録",
-    type: "Mobile App",
-    description:
-      "全国54の動物園への来園をスタンプラリー感覚で記録・管理できる、動物園好きのためのアプリ。",
-    highlights: [
-      "来園済・予定・未訪問を全国マップで色分け表示",
-      "達成率・地方別・動物カテゴリ別など多彩な統計",
-      "パンダ・コアラなど20種類の動物カテゴリで施設を検索",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E5%8B%95%E7%89%A9%E5%9C%92%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3%E3%83%BC%E5%85%A8%E5%9B%BD%E3%82%81%E3%81%90%E3%82%8A%E8%A8%98%E9%8C%B2/id6776901519",
-    appId: "6776901519",
-  },
-  {
-    name: "スペイン語文法: Grammar Paws",
-    type: "Mobile App",
-    description:
-      "ペットを育てながらスペイン語文法を学べる学習アプリ。CEFR A1〜C2とビジネスの900項目を、母語→スペイン語の順で直感的に理解できます。",
-    highlights: [
-      "CEFR A1〜C2・ビジネスの900文法項目を収録、動詞には不定詞注釈付き",
-      "間隔反復（SRS）とクイズ・対戦ゲームの3つの学習モード",
-      "100種類のペット育成・図鑑収集で学習を習慣化",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E3%82%B9%E3%83%9A%E3%82%A4%E3%83%B3%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6816064767",
-    appId: "6816064767",
-  },
-  {
-    name: "韓国語単語を学ぶ: Vocab Paws",
-    type: "Mobile App",
-    description:
-      "ペットを育てながら韓国語単語を学べる学習アプリ。TOPIK 1〜6級とビジネスの3,000語を、実際の発音表記とともに習得できます。",
-    highlights: [
-      "TOPIK 1〜6級・ビジネスの3,000語と例文3,000文を収録",
-      "濃音化・鼻音化・連音などの発音表記で聞き取りにも強く",
-      "全3,000語無料、間隔反復とペット育成で継続をサポート",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E9%9F%93%E5%9B%BD%E8%AA%9E%E5%8D%98%E8%AA%9E%E3%82%92%E5%AD%A6%E3%81%B6-vocab-paws/id6805960002",
-    appId: "6805960002",
-  },
-  {
-    name: "韓国語文法: Grammar Paws",
-    type: "Mobile App",
-    description:
-      "ペットを育てながら韓国語文法を学べる学習アプリ。TOPIK 1〜6級とビジネスの900項目を、パッチムの有無まで明記した接続ルールで理解できます。",
-    highlights: [
-      "TOPIK 1〜6級・ビジネスの900文法項目と例文1,224文を収録",
-      "ハングルのローマ字表記とパッチム別の接続ルール",
-      "間隔反復（SRS）・3つの学習モード・ペット育成で習慣化",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E9%9F%93%E5%9B%BD%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6805949109",
-    appId: "6805949109",
-  },
-  {
-    name: "日本語単語: Vocabulary Paws",
-    type: "Mobile App",
-    description:
-      "日本語学習者向けに、ペットを育てながらJLPT N5〜N1とビジネスの3,000語を習得できる単語学習アプリ。15言語に対応しています。",
-    highlights: [
-      "JLPT N5〜N1・ビジネスの3,000語と例文3,000文を収録",
-      "ふりがな表示切り替えと15言語の母語解説",
-      "間隔反復（SRS）と100種類のペット収集で継続をサポート",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E6%97%A5%E6%9C%AC%E8%AA%9E%E5%8D%98%E8%AA%9E-vocabulary-paws/id6799179231",
-    appId: "6799179231",
-  },
-  {
-    name: "日本語文法: Grammar Paws",
-    type: "Mobile App",
-    description:
-      "日本語学習者向けに、ペットを育てながらJLPT N5〜N1とビジネスの文法906項目を学べるアプリ。母語→日本語の順で接続ルールを理解できます。",
-    highlights: [
-      "JLPT N5〜N1・ビジネスの906文法項目と例文973文を収録",
-      "ふりがな表示切り替えと15言語の母語解説",
-      "フラッシュカード・クイズ・対戦ゲームの3つの学習モード",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E6%97%A5%E6%9C%AC%E8%AA%9E%E6%96%87%E6%B3%95-grammar-paws/id6798627790",
-    appId: "6798627790",
-  },
-  {
-    name: "サブスク管理: SubTracks",
-    type: "Mobile App",
-    description:
-      "契約中のサブスクや毎月の固定費・支払い方法をかんたんに登録・管理し、無駄な出費をなくすための固定費管理アプリ。",
-    highlights: [
-      "人気サービスのプリセットからワンタップで登録",
-      "請求日・無料体験の解約期限を事前にプッシュ通知",
-      "支払い方法別・カテゴリ別の円グラフで固定費を可視化",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E3%82%B5%E3%83%96%E3%82%B9%E3%82%AF%E7%AE%A1%E7%90%86-subtracks/id6796983012",
-    appId: "6796983012",
-  },
-  {
-    name: "1日あたりの利用コスト: UsePace",
-    type: "Mobile App",
-    description:
-      "モノを使い始めた日と使い終わった日を記録するだけで、1日あたりのコストと消費ペースを自動計算する消費ペース管理アプリ。",
-    highlights: [
-      "ワンタップで使用開始・終了を記録し日割りコストを自動計算",
-      "過去実績から1ヶ月の必要量を予測してまとめ買いを最適化",
-      "アカウント登録不要・完全オフラインでプライバシーも安心",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/1%E6%97%A5%E3%81%82%E3%81%9F%E3%82%8A%E3%81%AE%E5%88%A9%E7%94%A8%E3%82%B3%E3%82%B9%E3%83%88-usepace/id6796442878",
-    appId: "6796442878",
-  },
-  {
-    name: "3000英単語-ペットと学ぶ英語学習",
-    type: "Mobile App",
-    description:
-      "ペットを育てながら英単語3,000語を習得するゲーミファイド学習アプリ。スマートレビューシステムと100種以上のペット収集で毎日の学習を習慣化します。",
-    highlights: [
-      "学習するたびにペットが成長・進化するインセンティブ設計",
-      "3,000の頻出英単語をスマートレビューで効率的に定着",
-      "タイムアタックゲームと100種以上のペット収集で継続をサポート",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/3000-english-vocab-with-pets/id6767876543",
-    appId: "6767876543",
-  },
-  {
-    name: "山コレクション",
-    type: "Mobile App",
-    description:
-      "百名山だけに限定せず、百低山・花の百名山など複数カテゴリを横断して管理できる登山管理アプリ。記録・検索・可視化・振り返りを一つの流れで使える設計にしました。",
-    highlights: [
-      "百名山・百低山・花の百名山など複数カテゴリを一元管理",
-      "登山記録・達成状況・計画を可視化",
-      "あなた好みの山がきっと見つかる",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E5%B1%B1%E3%82%B3%E3%83%AC%E3%82%AF%E3%82%B7%E3%83%A7%E3%83%B3/id6760900479",
-    appId: "6760900479",
-  },
-  {
-    name: "水族館コレクション",
-    type: "Mobile App",
-    description:
-      "全国61の水族館を発見・訪問記録・収集できる水族館トラッキングアプリ。沖縄から北海道まで、9地域別に閲覧し旅行計画に役立てられます。",
-    highlights: [
-      "全国61水族館を地域・生き物種別で検索・整理",
-      "訪問済みをチェックしてコレクション進捗を管理",
-      "旅行計画と水族館めぐりを一つのアプリで完結",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/japan-aquarium-collection/id6766937137",
-    appId: "6766937137",
-  },
-  {
-    name: "Focus Pet - Habbit",
-    type: "Mobile App",
-    description:
-      "タスク完了とフォーカス時間でXPを稼ぎ、ペットを育てるタスク管理アプリ。生産性向上をゲーム感覦で楽しめます。",
-    highlights: [
-      "タスク完了とフォーカスセッションでペットが進化",
-      "XP・報酬システムで習慣化をサポート",
-      "ゲーム感覦でTODO管理を楽しめる",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/focus-pet-habbit/id6759491280",
-    appId: "6759491280",
-  },
-  {
-    name: "Book Echo - Action Tip",
-    type: "Web & Mobile",
-    description:
-      "読んだ本の知識をアクションに変える読書管理アプリ。「読んで終わり」ではなく、実生活での変化につながる学びをサポートします。",
-    highlights: [
-      "未読・読書中・読了でスマートにライブラリ管理",
-      "気づきをアクションプランとして記録",
-      "読書と実践のギャップを埋める構造化ノート機能",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/book-echo-action-tip/id6759045118",
-    appId: "6759045118",
-  },
-  {
-    name: "Asset Forecast",
-    type: "Mobile App",
-    description:
-      "資産や家計の状況を天気マークで直感的に把握できるスマート資産管理アプリ。実績入力から将来シミュレーションまでスマホひとつで完結します。",
-    highlights: [
-      "晴れ・曇り・雨の天気マークで毎月の資産コンディションを可視化",
-      "50種類以上の指標・グラフを自由に配置できる分析画面",
-      "データは全て端末内にのみ保存",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/asset-forecast/id6753914294",
-    appId: "6753914294",
-  },
-  {
-    name: "麻雀クイズ！〜役・翻符・点数〜",
-    type: "Mobile App",
-    description:
-      "役の翻数・役判定・翻符読み取り・点数計算を5段階で反復練習できる、麻雀点数計算トレーニングアプリ。",
-    highlights: [
-      "あなたのレベルに合わせたクイズで基礎から実戦力までカバー",
-      "手牌を見ながら役・翻符・点数を総合的に判断する出題",
-      "履歴画面で正答率やスコア推移を振り返り可能",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E9%BA%BB%E9%9B%80%E3%82%AF%E3%82%A4%E3%82%BA-%E5%BD%B9-%E7%BF%BB%E7%AC%A6-%E7%82%B9%E6%95%B0/id6759558674",
-    appId: "6759558674",
-  },
-  {
-    name: "ふたり家計",
-    type: "Mobile App",
-    description:
-      "夫婦・カップル向けに毎月の家計精算を自動化。立て替えや共通口座の入金額をシンプルに算出できる家計管理アプリ。",
-    highlights: [
-      "負担比率を柔軟に設定し、精算額を自動計算",
-      "個人払い・共通支出・口座ごとの必要入金額を可視化",
-      "月別履歴とグラフ表示で支出傾向を確認",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E3%81%B5%E3%81%9F%E3%82%8A%E5%AE%B6%E8%A8%88/id6760020562",
-    appId: "6760020562",
-  },
-  {
-    name: "kashikari-お金の貸し借り記録アプリ",
-    type: "Mobile App",
-    description:
-      "友人や家族との少額の貸し借りをシンプルに記録・管理できる家計補助アプリ。名前・金額・メモ・日付だけで素早く記録し、未精算のやり取りを分かりやすく可視化します。",
-    highlights: [
-      "貸した・借りた履歴を相手ごとに整理して管理",
-      "期日設定や精算（部分返済・全額返済）に対応",
-      "データは端末内保存でアカウント登録不要",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/kashikari-loan-iou-tracker/id6762706658",
-    appId: "6762706658",
-  },
-  {
-    name: "SeedPocket",
-    type: "Web & Mobile",
-    description:
-      "家庭菜園で育てるハーブや野菜と、その素材を使ったレシピを一つのタイムラインで管理できる“暮らしのノート”。キッチンと畑をまたいで記録できます。",
-    highlights: [
-      "栽培スケジュールと収穫ログをレシピ候補と連動させて可視化",
-      "畑の状況は屋外でアプリから記録、栽培計画は自宅のPCから管理",
-      "Webとモバイルアプリを同時リリース",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/seed-pocket/id6756086853",
-    appId: "6756086853",
-  },
-  {
-    name: "九九九！ 〜 3桁掛け算九九〜",
-    type: "Mobile App",
-    description:
-      "1桁から3桁まで自由な組み合わせで暗算力を鍛える計算トレーニングアプリ。速度と正確性を両立した反復学習に対応。",
-    highlights: [
-      "桁数設定を細かくカスタマイズできる出題",
-      "10問モードと無限モードで学習スタイルを選択可能",
-      "カレンダーと成績グラフで継続状況と弱点を可視化",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E4%B9%9D%E4%B9%9D%E4%B9%9D-3%E6%A1%81%E6%8E%9B%E3%81%91%E7%AE%97%E4%B9%9D%E4%B9%9D/id6759827804",
-    appId: "6759827804",
-  },
-  {
-    name: "LuckyGames - Choice & Roulette",
-    type: "Mobile App",
-    description:
-      "日常・ビジネス・パーティーなど様々なシーンで意思決定をすばやく・公平に・楽しくサポートする多機能決断ツールアプリ。ルーレット・あみだくじ・爆弾ゲームなど6種類のミニゲームを搭載。",
-    highlights: [
-      "ルーレット・あみだくじ・爆弾・チーム分け・コイン・くじ引きの6ミニゲーム",
-      "英語・日本語・韓国語・中国語・ベトナム語の多言語対応",
-      "履歴機能で過去の結果をいつでも振り返り可能",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/luckygames-choice-roulette/id6760779611",
-    appId: "6760779611",
-  },
-  {
-    name: "Word Pocket - Pet",
-    type: "Mobile App",
-    description:
-      "ペットを育てながら語彙力を錢えるゲーミファイかれた単語学習アプリ。科学的な間隔反復法で効率よく単語を定着させます。",
-    highlights: [
-      "科学的な間隔反復法（SRS）で記憶を最大化",
-      "学習の進捗でコンパニオンペットが成長",
-      "ゲーム感覦で毎日の学習を継続できる仕組み",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/word-pocket-pet/id6759867409",
-    appId: "6759867409",
-  },
-  {
-    name: "Stock Nest - Management",
-    type: "Mobile App",
-    description:
-      "食材・日用品・医薬品・ペット用品まで、家庭の在庫をまとめて管理するスマートな在庫管理アプリ。賞味期限もロット単位で追跡できます。",
-    highlights: [
-      "ロット単位で賞味期限・消費期限を管理",
-      "食料品から日用品・医薬品まで幅広い品目に対応",
-      "美しいUIで家の在庫を一元管理",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/stock-nest-management/id6760417366",
-    appId: "6760417366",
-  },
-  {
-    name: "ドキドキスイッチ",
-    type: "Mobile App",
-    description:
-      "スイッチを1つずつ押して、爆弾を避けて全クリアを目指せ。シンプルなルールなのに銃薇気MAXなミニゲーム。飲み会やパーティーの罰ゲームにも。",
-    highlights: [
-      "爆弾の数やスイッチ数を自由にカスタマイズ",
-      "ひとりでじっく、みんなでワイワイ遅べるミニゲーム",
-      "飲み会・パーティーの罰ゲームに最適",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/%E3%83%89%E3%82%AD%E3%83%89%E3%82%AD%E3%82%B9%E3%82%A4%E3%83%83%E3%83%81/id6744993926",
-    appId: "6744993926",
-  },
-  {
-    name: "Pomodoro TaskTic",
-    type: "Mobile App",
-    description:
-      "ポモドーロテクニックに基づいた生産性アプリ。集中25分・休憩5分を繰り返すサイクルで、仕事・学習の集中力を高めます。",
-    highlights: [
-      "集中・休憩時間をライフスタイルに合わせてカスタマイズ",
-      "ポモドーロサイクルで集中力を継続してゴール達成をサポート",
-      "仕事・学習効率の改善に特化したシンプルなUI",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/pomodoro-tasktic/id6743796326",
-    appId: "6743796326",
-  },
-  {
-    name: "The Lake Collection",
-    type: "Mobile App",
-    description:
-      "日本全国の湖を発見・追跡・探索するための統合アプリ。百名湖・ダム湖・カルデラ湖など多彩なカテゴリを地図と訪問記録で管理できます。",
-    highlights: [
-      "百名湖・ダム湖・カルデラ湖など複数カテゴリを一元管理",
-      "地図表示と訪問チェックで探索進捗を可視化",
-      "ドライブ・観光・自然探索の旅行計画に最適",
-    ],
-    linkLabel: "App Store で見る",
-    href: "https://apps.apple.com/jp/app/the-lake-collection/id6766865900",
-    appId: "6766865900",
-  },
-];
-
-const services = [
-  {
-    name: "Everyday Finance",
-    badge: "Squad",
-    description:
-      "Asset Forecast など日々の意思決定を軽くする金融文脈の体験を継続改善。行動データとUIを細かく検証しています。",
-    benefits: ["マネーフローの可視化", "個別チューニングされたアラート", "ローカル重視のオフライン基盤"],
-  },
-  {
-    name: "Seed Lab",
-    badge: "Squad",
-    description:
-      "SeedPocket を起点に、余白時間の学びや記録体験を検証。マルチデバイスで同じトーンを保つデザイン言語を開発しています。",
-    benefits: ["モバイル / Web 同期", "AI 補助ライティング", "リッチメディア最適化"],
-  },
-  {
-    name: "Experience Ops",
-    badge: "Core Stack",
-    description:
-      "全プロダクト共通のデザインシステムや分析パイプラインを整備し、日次で改善サイクルを回すための社内プラットフォームを構築。",
-    benefits: ["統合データレイク", "デザインシステムLumen", "自動テレメトリとA/Bテスト"],
-  },
-];
-
-const stats = [
-  { value: "17+", label: "ローンチしたプロダクト" },
-  { value: "4.9/5", label: "平均アプリ評価" },
-  { value: "1 週間", label: "平均リリースリードタイム" },
-  { value: "3 拠点", label: "Tokyo / Chiba / Fukuoka" },
-];
-
-const sectors = [
-  { name: "Fintech", detail: "資産管理・分析・投資" },
-  { name: "Lifestyle", detail: "家庭菜園 / レシピ / 記録" },
-  { name: "Travl", detail: "旅行計画 / 地図 / ナビゲーション" },
-];
-
-const timeline = [
-  {
-    phase: "01 / Discovery Sprint",
-    title: "課題と仮説を言語化",
-    text: "社内リサーチャーとPdMが仮説キャンバスを更新。週次で生活者インタビューを行い、次の実験テーマを確定します。",
-  },
-  {
-    phase: "02 / Pilot Build",
-    title: "MVPを実装し検証",
-    text: "デザインシステムと共通APIを活用し、モバイル / Web を並行開発。テレメトリを即日で反映し、改善案へ接続します。",
-  },
-  {
-    phase: "03 / Scale & Train",
-    title: "グロースと内省",
-    text: "プロダクトごとにLTV/KPIを見直し、社内Wikiへ知見を蓄積。採用・R&Dテーマへ展開して次の探索に繋げます。",
-  },
-];
-
-export default async function Home() {
-  const iconUrls = await Promise.all(
-    products.map((p) => fetchAppIconUrl(p.appId))
+function Wave({ className = "", fill }: { className?: string; fill: string }) {
+  return (
+    <svg
+      viewBox="0 0 1440 120"
+      preserveAspectRatio="none"
+      className={`block h-16 w-full md:h-24 ${className}`}
+      aria-hidden="true"
+    >
+      <path
+        d="M0 64 C 180 120 360 120 540 72 C 720 24 900 8 1080 48 C 1260 88 1350 92 1440 76 L1440 120 L0 120 Z"
+        fill={fill}
+      />
+    </svg>
   );
+}
+
+/* ---------- Hero ---------- */
+
+function Hero({ apps }: { apps: AppWithIcon[] }) {
+  const withIcon = apps.filter((a) => a.icon);
+  const cols = [withIcon.slice(0, 3), withIcon.slice(3, 6), withIcon.slice(6, 9)];
 
   return (
-    <div className="relative isolate">
-      <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute inset-x-0 top-0 h-[520px] bg-gradient-to-b from-cyan-500/20 via-slate-900/0 to-transparent blur-3xl" />
-        <div className="absolute left-1/2 top-24 h-72 w-72 -translate-x-1/2 bg-cyan-400/20 blur-[120px]" />
+    <section className="relative overflow-hidden pt-28 md:pt-36">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute -top-40 -right-40 h-[560px] w-[560px] rounded-full bg-aqua-light/60 blur-3xl" />
+        <div className="absolute top-60 -left-40 h-[420px] w-[420px] rounded-full bg-[#ffe3d9]/70 blur-3xl" />
       </div>
 
-      <div className="mx-auto flex min-h-screen max-w-6xl flex-col gap-12 px-6 pb-20 pt-12 lg:px-10">
-        <header className="flex flex-col gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur lg:flex-row lg:items-center lg:justify-between">
-          <div>
-            <p className="text-sm uppercase tracking-[0.3em] text-cyan-200">
-              AquaPeak / Digital Product Studio
-            </p>
-            <h1 className="mt-2 text-2xl font-semibold text-white">
-            より長く、より多くの人に使われるサービスへ。
-            </h1>
-          </div>
-          <div className="flex flex-wrap items-center gap-3 text-sm text-slate-200">
-            <span className="rounded-full border border-white/20 px-4 py-1">
-              Everyday Finance
+      <div className="mx-auto grid max-w-7xl items-center gap-14 px-5 md:px-8 lg:grid-cols-[1.1fr_0.9fr]">
+        <div>
+          <Eyebrow>Product Studio · Shibuya, Tokyo</Eyebrow>
+          <h1 className="mt-6 text-[2.75rem] leading-[1.2] font-black tracking-tight text-ink sm:text-6xl lg:text-7xl">
+            毎日を、
+            <br />
+            少しだけ
+            <br />
+            <span className="relative inline-block">
+              <span className="relative z-10">軽く</span>
+              <span className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-aqua-light md:h-5" />
             </span>
-            <span className="rounded-full border border-white/20 px-4 py-1">
-              Knowledge Tools
-            </span>
-            <span className="rounded-full border border-white/20 px-4 py-1">
-              Multi-Device UX
-            </span>
+            する。
+          </h1>
+          <p className="mt-8 max-w-xl text-base leading-8 text-ink-soft md:text-lg md:leading-9">
+            AquaPeak は、学び・お金・暮らし・おでかけ・遊びの領域で、
+            日々の小さな「めんどう」をほどくアプリを自社で企画・開発・運営しているプロダクトスタジオです。
+          </p>
+          <div className="mt-10 flex flex-wrap gap-3">
+            <a
+              href="#apps"
+              className="rounded-full bg-ink px-7 py-3.5 text-sm font-bold text-white shadow-lg shadow-ink/20 transition hover:bg-aqua-deep"
+            >
+              アプリを見る
+            </a>
+            <a
+              href="#about"
+              className="rounded-full border border-line bg-white px-7 py-3.5 text-sm font-bold text-ink transition hover:border-ink"
+            >
+              私たちについて
+            </a>
           </div>
-        </header>
 
-        <section className="grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
-          <div className="space-y-8">
-            <p className="inline-flex items-center gap-2 rounded-full border border-white/20 px-4 py-1 text-sm text-cyan-100">
-              <span className="h-2 w-2 rounded-full bg-cyan-300" />
-              since 2025 / Tokyo & Fukuoka
-            </p>
-            <div className="space-y-6">
-              <h2 className="text-4xl font-semibold leading-tight text-white md:text-5xl">
-                <span className="block">モバイルと Web を</span>
-                <span className="block">縦横無尽に駆ける</span>
-                <span className="block">プロダクト開発集団。</span>
-              </h2>
-              <p className="text-lg text-slate-300">
-                AquaPeak はモバイルアプリと Web サービスを自社で企画・開発・運営するチームです。
-                家庭菜園とレシピをつなぐ SeedPocket、資産の“天気”を可視化する Asset Forecast などで培った
-                UX とテクノロジーを核に、生活者の行動をなめらかにするプロダクトを継続的にローンチしています。
-              </p>
-            </div>
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="#products"
-                className="rounded-full bg-cyan-400 px-8 py-3 text-base font-medium text-slate-900 transition hover:bg-cyan-300"
-              >
-                プロダクト一覧を見る
-              </a>
-              <a
-                href="#journal"
-                className="rounded-full border border-white/30 px-8 py-3 text-base font-medium text-white transition hover:border-cyan-200"
-              >
-                ビルドログを読む
-              </a>
-            </div>
-          </div>
-          <div className="space-y-4 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur">
-            <p className="text-sm text-slate-300">プロダクトフォーカス</p>
-            <div className="grid grid-cols-2 gap-4 text-xl font-semibold text-white">
-              <span>Personal Finance</span>
-              <span>Creative Routines</span>
-              <span>Ambient Productivity</span>
-              <span>City Remote Life</span>
-            </div>
-            <p className="text-sm text-slate-400">
-              少人数のクロスファンクショナルチームで、生活者の習慣に寄り添う機能を素早く検証しています。
-            </p>
-          </div>
-        </section>
-
-        <section id="products" className="space-y-8">
-          <div className="flex flex-col gap-2">
-            <p className="text-sm uppercase tracking-[0.4em] text-cyan-200">
-              Products
-            </p>
-            <h3 className="text-3xl font-semibold text-white">
-              AquaPeak のプロダクトライン
-            </h3>
-            <p className="text-base text-slate-300">
-              モバイルアプリと Web サービスの両輪で、暮らしの意思決定をアップデートする自社プロダクトを研究・展開しています。
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {products.map((product, i) => {
-              const appIconUrl = iconUrls[i];
-              return (
-              <article
-                key={product.name}
-                className="relative flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-4"
-              >
-                <div className="flex items-center gap-4">
-                  {appIconUrl && (
-                    <Image
-                      src={appIconUrl}
-                      alt={`${product.name} icon`}
-                      width={56}
-                      height={56}
-                      className="rounded-xl"
-                    />
-                  )}
-                  <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                    {product.type}
-                  </div>
-                  {product.href && (
-                    <div className="ml-auto flex-shrink-0 rounded-lg bg-white p-1">
-                      <Image
-                        src={`https://api.qrserver.com/v1/create-qr-code/?size=120x120&data=${encodeURIComponent(product.href)}`}
-                        alt={`QR code for ${product.name}`}
-                        width={50}
-                        height={50}
-                        unoptimized
-                      />
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <h4 className="text-2xl font-semibold text-white">{product.name}</h4>
-                  <p className="mt-2 text-sm text-slate-300">{product.description}</p>
-                </div>
-                {product.highlights?.length ? (
-                  <ul className="space-y-1 text-sm text-slate-200">
-                    {product.highlights.map((item) => (
-                      <li key={item} className="flex items-start gap-2">
-                        <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                ) : null}
-                <a
-                  href={product.href}
-                  className="mt-auto inline-flex items-center gap-2 text-sm font-semibold text-cyan-200 hover:text-cyan-100 after:absolute after:inset-0"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {product.linkLabel}
-                  <span>↗</span>
-                </a>
-              </article>
-              );
-            })}
-          </div>
-        </section>
-
-        <section className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="space-y-2 border-white/10 md:border-l md:pl-6 first:md:border-l-0 first:md:pl-0">
-              <p className="text-3xl font-semibold text-white">{stat.value}</p>
-              <p className="text-sm uppercase tracking-wide text-slate-400">
-                {stat.label}
-              </p>
-            </div>
-          ))}
-        </section>
-
-        <section id="services" className="space-y-8">
-          <div className="flex flex-col gap-2">
-            <p className="text-sm uppercase tracking-[0.4em] text-cyan-200">
-              Product Stacks
-            </p>
-            <h3 className="text-3xl font-semibold text-white">
-              AquaPeak の 3 つのケイパビリティ
-            </h3>
-            <p className="text-base text-slate-300">
-              戦略・UI/UX・実装・運用を分断せず、同じチームで高速に検証しながら自社プロダクトを磨き込みます。
-            </p>
-          </div>
-          <div className="grid gap-6 md:grid-cols-3">
-            {services.map((service) => (
-              <article
-                key={service.name}
-                className="flex h-full flex-col gap-4 rounded-2xl border border-white/10 bg-gradient-to-b from-white/10 to-white/0 p-6"
-              >
-                <div className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                  {service.badge}
-                </div>
-                <h4 className="text-2xl font-semibold text-white">{service.name}</h4>
-                <p className="text-sm text-slate-300">{service.description}</p>
-                <ul className="mt-2 space-y-2 text-sm text-slate-200">
-                  {service.benefits.map((item) => (
-                    <li key={item} className="flex items-start gap-2">
-                      <span className="mt-1 h-1.5 w-1.5 rounded-full bg-cyan-300" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+          <dl className="mt-14 grid max-w-md grid-cols-3 gap-6 border-t border-line pt-8">
+            {[
+              { value: String(apps.length), unit: "本", label: "リリースしたアプリ" },
+              { value: String(categories.length), unit: "", label: "ジャンル" },
+              { value: "2025", unit: "", label: "創業" },
+            ].map((s) => (
+              <div key={s.label}>
+                <dt className="sr-only">{s.label}</dt>
+                <dd className="font-display text-3xl font-bold text-ink md:text-4xl">
+                  {s.value}
+                  <span className="ml-0.5 text-base font-bold">{s.unit}</span>
+                </dd>
+                <dd className="mt-1 text-xs text-mute">{s.label}</dd>
+              </div>
             ))}
-          </div>
-        </section>
+          </dl>
+        </div>
 
-        <section className="grid gap-8 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur lg:grid-cols-[1fr_0.8fr]">
-          <div className="space-y-4">
-            <p className="text-sm uppercase tracking-[0.4em] text-cyan-200">
-              Focus Fields
-            </p>
-            <h3 className="text-3xl font-semibold text-white">
-              どんな領域の課題に向き合っているか
-            </h3>
-            <p className="text-base text-slate-300">
-              Fintech、ライフスタイルなどのtoC向けプロダクトはもちろん、人材開発領域でのtoB向けプロダクトも展開し検証しています。
-            </p>
-          </div>
-          <div className="grid gap-4">
-            {sectors.map((sector) => (
+        {/* アイコンが浮かぶビジュアル */}
+        <div aria-hidden="true" className="relative mx-auto hidden w-full max-w-lg lg:block">
+          <div className="absolute inset-8 rounded-[48px] bg-gradient-to-br from-white to-mist shadow-[0_40px_80px_-40px_rgba(11,29,46,0.35)]" />
+          <div className="relative grid grid-cols-3 gap-6 p-14">
+            {cols.map((col, ci) => (
               <div
-                key={sector.name}
-                className="flex items-center justify-between rounded-2xl border border-white/10 px-4 py-3 text-sm text-slate-200"
+                key={ci}
+                className={`flex flex-col gap-6 ${ci === 1 ? "translate-y-10" : ""}`}
               >
-                <div>
-                  <p className="font-medium text-white">{sector.name}</p>
-                  <p className="text-xs text-slate-400">{sector.detail}</p>
-                </div>
-                <span className="text-cyan-200">↗</span>
+                {col.map((app, i) => (
+                  <div
+                    key={app.appId}
+                    className="animate-float"
+                    style={{ animationDelay: `${(ci * 3 + i) * -0.8}s` }}
+                  >
+                    <AppIcon
+                      src={app.icon}
+                      name={app.name}
+                      size={104}
+                      priority
+                      className="shadow-[0_20px_40px_-16px_rgba(11,29,46,0.4)]"
+                    />
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </div>
 
-        <section id="journal" className="space-y-8">
-          <div className="flex flex-col gap-2">
-            <p className="text-sm uppercase tracking-[0.4em] text-cyan-200">
-              Approach
-            </p>
-            <h3 className="text-3xl font-semibold text-white">
-              3 フェーズで成果を素早く積み上げる
-            </h3>
-          </div>
-          <div className="grid gap-4 lg:grid-cols-3">
-            {timeline.map((item) => (
-              <article
-                key={item.phase}
-                className="flex h-full flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-5"
-              >
-                <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                  {item.phase}
-                </p>
-                <h4 className="text-xl font-semibold text-white">{item.title}</h4>
-                <p className="text-sm text-slate-300">{item.text}</p>
-              </article>
+      <IconMarquee apps={withIcon} />
+    </section>
+  );
+}
+
+function IconMarquee({ apps }: { apps: AppWithIcon[] }) {
+  if (apps.length === 0) return null;
+  const half = Math.ceil(apps.length / 2);
+  const rows = [apps.slice(0, half), apps.slice(half)];
+  return (
+    <div
+      aria-hidden="true"
+      className="mt-20 space-y-4 [mask-image:linear-gradient(90deg,transparent,#000_10%,#000_90%,transparent)] md:mt-28"
+    >
+      {rows.map((row, ri) => (
+        <div key={ri} className="flex overflow-hidden">
+          <div
+            className={`flex w-max shrink-0 gap-4 ${ri === 0 ? "animate-marquee" : "animate-marquee-rev"}`}
+          >
+            {[...row, ...row].map((app, i) => (
+              <AppIcon key={`${app.appId}-${i}`} src={app.icon} name={app.name} size={72} />
             ))}
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+  );
+}
 
-        <section className="grid gap-6 rounded-3xl border border-white/10 bg-white/5 p-6 backdrop-blur md:grid-cols-2">
-          <div className="space-y-2">
-            <p className="text-sm uppercase tracking-[0.4em] text-cyan-200">
-              Studio
-            </p>
-            <h3 className="text-3xl font-semibold text-white">渋谷オフィス</h3>
-            <p className="text-base text-slate-300">
-              事業拡大に伴い、東京都渋谷区に新たなオフィスを開設いたしました。
-              アクセス性の高い渋谷の中心地に拠点を設けることで、迅速なサービス提供を推進してまいります。
-            </p>
-          </div>
-          <div className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm text-slate-100">
-            <div>
-              <p className="text-xs uppercase tracking-[0.4em] text-cyan-200">Address</p>
-              <p className="mt-1 font-medium">
-                150-0002<br />
-                東京都渋谷区渋谷2-19-15<br />
-                宮益坂ビルディング 609
-              </p>
-            </div>
-            <div className="text-xs text-slate-400">
-              渋谷駅徒歩3分。来訪の際は事前にご連絡ください。
-            </div>
-          </div>
-        </section>
+/* ---------- About ---------- */
 
-        <section
-          id="contact"
-          className="space-y-6 rounded-3xl border border-cyan-400/40 bg-gradient-to-br from-cyan-500/20 via-transparent to-indigo-500/10 p-8 text-center"
-        >
-          <p className="text-sm uppercase tracking-[0.4em] text-cyan-100">
+function About() {
+  return (
+    <section id="about" className="py-24 md:py-36">
+      <div className="mx-auto grid max-w-7xl gap-14 px-5 md:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+        <div className="reveal lg:sticky lg:top-32 lg:self-start">
+          <Eyebrow>About us</Eyebrow>
+          <h2 className="mt-6 text-3xl leading-[1.45] font-black text-ink md:text-[2.75rem] md:leading-[1.4]">
+            <span className="block whitespace-nowrap">暮らしの中の</span>
+            <span className="block whitespace-nowrap">小さな「めんどう」を、</span>
+            <span className="block whitespace-nowrap">アプリでほどく。</span>
+          </h2>
+          <p className="mt-8 leading-8 text-ink-soft">
+            家計の見通し、外国語の勉強、家の在庫、旅の記録。どれも大事なのに、つい後回しになってしまうこと。
+            AquaPeak はそうした日常のひっかかりに目を向け、ひとつずつアプリという形で解決してきました。
+            水のようになめらかに暮らしに溶け込み、山頂からの景色のように先を見通せる体験を目指しています。
+          </p>
+        </div>
+
+        <ol className="space-y-5">
+          {principles.map((p) => (
+            <li
+              key={p.no}
+              className="reveal rounded-[28px] border border-line bg-white p-7 md:p-10"
+            >
+              <p className="font-display text-sm font-bold text-aqua">{p.no}</p>
+              <h3 className="mt-3 text-xl font-bold text-ink md:text-2xl">{p.title}</h3>
+              <p className="mt-4 leading-8 text-ink-soft">{p.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Apps ---------- */
+
+function Featured({ apps }: { apps: AppWithIcon[] }) {
+  const featured = featuredIds
+    .map((id) => apps.find((a) => a.appId === id))
+    .filter((a): a is AppWithIcon => Boolean(a));
+
+  return (
+    <div className="grid gap-5 lg:grid-cols-3">
+      {featured.map((app) => {
+        const copy = featuredCopy[app.appId];
+        const tone = toneClass[copy?.tone ?? "aqua"];
+        return (
+          <article
+            key={app.appId}
+            className="reveal group flex flex-col overflow-hidden rounded-[32px] border border-line bg-white"
+          >
+            <div
+              className={`relative flex h-56 items-center justify-center overflow-hidden bg-gradient-to-br ${tone.panel}`}
+            >
+              <div className="absolute h-72 w-72 rounded-full border border-white/80" />
+              <div className="absolute h-48 w-48 rounded-full border border-white/80" />
+              <AppIcon
+                src={app.icon}
+                name={app.name}
+                size={112}
+                className="relative shadow-[0_24px_48px_-16px_rgba(11,29,46,0.45)] transition duration-500 group-hover:scale-105 group-hover:-rotate-3"
+              />
+            </div>
+            <div className="flex flex-1 flex-col p-7">
+              <p className="text-sm font-bold text-ink-soft">{copy?.catch}</p>
+              <h3 className="mt-2 font-display text-2xl font-bold text-ink">{app.name}</h3>
+              <ul className="mt-5 space-y-2.5 text-sm leading-6 text-ink-soft">
+                {app.highlights.map((h) => (
+                  <li key={h} className="flex gap-3">
+                    <span className={`mt-2 h-1.5 w-1.5 shrink-0 rounded-full ${tone.dot}`} />
+                    {h}
+                  </li>
+                ))}
+              </ul>
+              <a
+                href={app.href}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-8 inline-flex items-center justify-center gap-2 self-start rounded-full bg-ink px-6 py-3 text-sm font-bold text-white transition hover:bg-aqua-deep"
+              >
+                App Store で見る <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+function Apps({ apps }: { apps: AppWithIcon[] }) {
+  return (
+    <section id="apps" className="bg-mist/60 py-24 md:py-32">
+      <div className="mx-auto max-w-7xl px-5 md:px-8">
+        <div className="reveal flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div>
+            <Eyebrow>Our apps</Eyebrow>
+            <h2 className="mt-6 text-3xl font-black text-ink md:text-5xl">注目のアプリ</h2>
+          </div>
+          <p className="max-w-md leading-8 text-ink-soft">
+            AquaPeak のアプリは、どれも自分たちで企画し、デザインし、開発しています。まずはこの3本から。
+          </p>
+        </div>
+        <div className="mt-12">
+          <Featured apps={apps} />
+        </div>
+
+        <div className="mt-24 md:mt-32">
+          <div className="reveal mb-10 flex items-baseline gap-4">
+            <h2 className="text-2xl font-black text-ink md:text-4xl">すべてのアプリ</h2>
+            <span className="font-display text-lg font-bold text-aqua-deep">{apps.length}</span>
+          </div>
+          <AppExplorer apps={apps} />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Process ---------- */
+
+function Process() {
+  return (
+    <section id="process" className="relative bg-ink text-white">
+      <Wave fill="#0b1d2e" className="absolute -top-16 left-0 md:-top-24" />
+      <div className="mx-auto max-w-7xl px-5 py-24 md:px-8 md:py-32">
+        <div className="reveal max-w-2xl">
+          <Eyebrow light>How we work</Eyebrow>
+          <h2 className="mt-6 text-3xl leading-[1.4] font-black md:text-5xl">
+            小さくつくって、
+            <br />
+            長く育てる。
+          </h2>
+          <p className="mt-6 leading-8 text-white/70">
+            少人数のチームで、企画から運営までを一気通貫で。だからこそ、出してからの改善が速いのが私たちの強みです。
+          </p>
+        </div>
+
+        <ol className="mt-16 grid gap-px overflow-hidden rounded-[28px] bg-white/10 md:grid-cols-3">
+          {steps.map((s) => (
+            <li key={s.no} className="reveal bg-ink p-8 md:p-10">
+              <div className="flex items-baseline justify-between">
+                <span className="font-display text-6xl font-bold text-aqua/90">{s.no}</span>
+                <span className="font-display text-sm font-semibold tracking-[0.2em] text-white/40 uppercase">
+                  {s.en}
+                </span>
+              </div>
+              <h3 className="mt-8 text-2xl font-bold">{s.title}</h3>
+              <p className="mt-4 leading-8 text-white/70">{s.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* 山並みのシルエット */}
+      <svg viewBox="0 0 1440 160" className="block h-24 w-full md:h-40" aria-hidden="true" preserveAspectRatio="none">
+        <path d="M0 160 L0 120 L220 40 L380 110 L560 20 L760 120 L940 60 L1120 130 L1300 50 L1440 100 L1440 160 Z" fill="#12304a" />
+        <path d="M0 160 L0 140 L180 90 L340 140 L520 80 L700 150 L900 100 L1080 150 L1260 95 L1440 140 L1440 160 Z" fill="#f7fafb" />
+      </svg>
+    </section>
+  );
+}
+
+/* ---------- Company ---------- */
+
+function Company() {
+  const address = "東京都渋谷区渋谷2-19-15 宮益坂ビルディング 609";
+  const rows = [
+    { label: "会社名", value: "AquaPeak Inc." },
+    { label: "設立", value: "2025年" },
+    {
+      label: "所在地",
+      value: (
+        <>
+          〒150-0002
+          <br />
+          {address}
+          <span className="mt-1 block text-sm text-mute">
+            渋谷駅より徒歩3分。ご来訪の際は事前にご連絡ください。
+          </span>
+        </>
+      ),
+    },
+    { label: "事業内容", value: "モバイルアプリ・Webサービスの企画、開発、運営" },
+    {
+      label: "お問い合わせ",
+      value: (
+        <a href={`mailto:${CONTACT_EMAIL}`} className="text-aqua-deep underline-offset-4 hover:underline">
+          {CONTACT_EMAIL}
+        </a>
+      ),
+    },
+  ];
+
+  return (
+    <section id="company" className="py-24 md:py-32">
+      <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+        <div className="reveal">
+          <Eyebrow>Company</Eyebrow>
+          <h2 className="mt-6 text-3xl font-black text-ink md:text-5xl">会社概要</h2>
+          <a
+            href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
+            target="_blank"
+            rel="noreferrer"
+            className="mt-10 flex items-center justify-between gap-4 rounded-3xl border border-line bg-white p-6 transition hover:border-aqua"
+          >
+            <span>
+              <span className="block font-display text-xs font-semibold tracking-[0.2em] text-aqua-deep uppercase">
+                Office
+              </span>
+              <span className="mt-2 block font-bold text-ink">渋谷・宮益坂オフィス</span>
+            </span>
+            <span className="text-sm font-bold whitespace-nowrap text-ink-soft">地図を開く ↗</span>
+          </a>
+        </div>
+
+        <dl className="reveal divide-y divide-line border-y border-line">
+          {rows.map((r) => (
+            <div key={r.label} className="grid gap-2 py-6 sm:grid-cols-[9rem_1fr] sm:gap-6">
+              <dt className="text-sm font-bold text-mute">{r.label}</dt>
+              <dd className="leading-8 text-ink">{r.value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- Contact ---------- */
+
+function Contact() {
+  return (
+    <section id="contact" className="px-5 pb-24 md:px-8 md:pb-32">
+      <div className="reveal relative mx-auto max-w-7xl overflow-hidden rounded-[40px] bg-gradient-to-br from-aqua-deep via-aqua to-[#5fd3e0] px-6 py-16 text-center text-white md:px-16 md:py-24">
+        <div aria-hidden="true" className="absolute -top-24 -right-24 h-80 w-80 rounded-full bg-white/10" />
+        <div aria-hidden="true" className="absolute -bottom-32 -left-16 h-96 w-96 rounded-full bg-white/10" />
+        <div className="relative">
+          <p className="font-display text-sm font-semibold tracking-[0.2em] uppercase text-white/80">
             Contact
           </p>
-          <h3 className="text-3xl font-semibold text-white">
-            AquaPeak のプロダクトに関するコラボレーション・取材はこちらから。
-          </h3>
-          <p className="text-base text-slate-100">
-            ユーザーヒアリングへの参加、メディア取材、共創リサーチなどのご相談を受け付けています。
+          <h2 className="mt-6 text-3xl leading-[1.4] font-black md:text-5xl">
+            アプリへのご意見・取材・
+            <br className="hidden sm:block" />
+            協業のご相談はこちらから
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl leading-8 text-white/85">
+            アプリの不具合や改善のご要望、メディア取材、共同での企画など、お気軽にご連絡ください。
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="mailto:assetforecast@gmail.com"
-              className="rounded-full bg-white px-8 py-3 text-base font-semibold text-slate-900 transition hover:bg-slate-100"
-            >
-              assetforecast@gmail.com
-            </a>
-            <a
-              href="https://calendly.com/"
-              className="rounded-full border border-white/40 px-8 py-3 text-base font-semibold text-white transition hover:border-white"
-              target="_blank"
-              rel="noreferrer"
-            >
-              ユーザーヒアリングに参加
-            </a>
-          </div>
-        </section>
-
-        <footer className="flex flex-col gap-3 border-t border-white/10 py-10 text-center text-sm text-slate-400 md:flex-row md:items-center md:justify-between md:text-left">
-          <span>© {new Date().getFullYear()} AquaPeak Inc.</span>
-          <div className="flex flex-col items-center gap-2 md:items-end">
-            <span>プロダクトで、毎日の体験をアップデートする。</span>
-            <a href="/privacy-policy" className="text-cyan-200 transition hover:text-cyan-100">
-              プライバシーポリシー
-            </a>
-          </div>
-        </footer>
+          <a
+            href={`mailto:${CONTACT_EMAIL}`}
+            className="mt-10 inline-flex items-center gap-3 rounded-full bg-white px-8 py-4 font-bold text-ink shadow-xl shadow-ink/20 transition hover:-translate-y-0.5"
+          >
+            メールで問い合わせる
+            <span aria-hidden="true">→</span>
+          </a>
+          <p className="mt-4 font-display text-sm text-white/80">{CONTACT_EMAIL}</p>
+        </div>
       </div>
-    </div>
+    </section>
+  );
+}
+
+export default async function Home() {
+  const apps = await getAppsWithIcons();
+  return (
+    <main>
+      <Hero apps={apps} />
+      <About />
+      <Apps apps={apps} />
+      <Process />
+      <Company />
+      <Contact />
+    </main>
   );
 }

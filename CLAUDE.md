@@ -14,25 +14,29 @@ No test suite is configured.
 
 ## Architecture
 
-Single-page Next.js 16 app (App Router) with React 19 and Tailwind CSS v4.
+Next.js 16 app (App Router) with React 19 and Tailwind CSS v4.
 
 ```
-src/app/
-  layout.tsx    # Root layout: metadata, fonts (Geist), global dark theme
-  page.tsx      # Entire site — all sections in one file
-  globals.css   # Tailwind import + CSS custom properties (brand colors, body bg)
+src/
+  app/
+    layout.tsx               # Metadata, fonts (Bricolage Grotesque + Zen Kaku Gothic New), Header/Footer
+    page.tsx                 # Top page: Hero / About / Apps / Process / Company / Contact sections
+    privacy-policy/page.tsx  # Privacy policy
+    globals.css              # Tailwind import + brand tokens (@theme) + animations
+  components/                # Header (client), Footer, Logo, AppIcon, AppExplorer (client: genre filter)
+  data/apps.ts               # All app data, categories, featured apps
+  lib/itunes.ts              # Fetches app icons from the iTunes lookup API (one batched request, cached 1 day)
 ```
-
-All content (products, services, stats, sectors, timeline) is defined as plain TypeScript arrays at the top of `page.tsx` and rendered inline. There are no separate components, API routes, CMS, or routing.
 
 ## Design System
 
-- **Color palette**: `slate-950` base, `cyan-*` for brand accents, `indigo-500` secondary — defined as CSS vars in `globals.css`
-- **Fonts**: Geist Sans + Geist Mono via `next/font/google`
-- **Pattern**: glassmorphism cards (`bg-white/5`, `border border-white/10`, `backdrop-blur`), cyan gradient overlays, rounded-2xl/3xl cards
+- **Light theme**: `paper` background, `ink` (navy) text, `aqua` accent, `coral` / `leaf` as small accents — tokens defined in `@theme` in `globals.css` (use as `bg-ink`, `text-aqua-deep`, etc.)
+- **Fonts**: `font-display` for Latin headings/numbers, `font-sans` (Japanese) for body
+- **Motifs**: water (wave SVG) + peak (mountain silhouette); rounded white cards with `border-line`
+- `.reveal` class = fade-in on scroll (CSS scroll-driven animation, progressive enhancement)
 
 ## Key Notes
 
 - `layout.tsx` has `metadataBase` set to a placeholder URL (`aquapeak.example.com`) — update to the real domain when deploying
-- Adding a new product: append to the `products` array in `page.tsx`
-- Adding a new page section: all sections are siblings inside the single `<div>` in `page.tsx`
+- Adding a new app: append to `apps` in `src/data/apps.ts` (icon is fetched automatically by `appId`)
+- Changing featured apps: edit `featuredIds` / `featuredCopy` in `src/data/apps.ts`

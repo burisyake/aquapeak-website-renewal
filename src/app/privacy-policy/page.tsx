@@ -72,35 +72,32 @@ const sections = [
 
 export default function PrivacyPolicyPage() {
   return (
-    <main className="min-h-screen bg-slate-950 px-6 py-16 text-slate-100 md:px-10">
-      <div className="mx-auto w-full max-w-4xl space-y-8">
-        <header className="space-y-3 border-b border-white/10 pb-8">
-          <p className="text-xs uppercase tracking-[0.35em] text-cyan-200">Privacy Policy</p>
-          <h1 className="text-3xl font-semibold text-white md:text-4xl">プライバシーポリシー</h1>
-          <p className="text-sm text-slate-300">
+    <main className="px-5 pt-32 pb-24 md:px-8 md:pt-40">
+      <div className="mx-auto w-full max-w-3xl">
+        <header className="border-b border-line pb-10">
+          <p className="font-display text-sm font-semibold tracking-[0.2em] text-aqua-deep uppercase">
+            Privacy Policy
+          </p>
+          <h1 className="mt-4 text-3xl font-black text-ink md:text-5xl">プライバシーポリシー</h1>
+          <p className="mt-6 leading-8 text-ink-soft">
             AquaPeak Inc.（以下「当社」）は、当社が提供するサービスにおける利用者の個人情報を適切に取り扱うため、以下のとおりプライバシーポリシーを定めます。
           </p>
         </header>
 
-        <section className="space-y-6">
+        <div className="divide-y divide-line">
           {sections.map((section) => (
-            <article
-              key={section.title}
-              className="space-y-3 rounded-2xl border border-white/10 bg-white/5 p-5"
-            >
-              <h2 className="text-lg font-semibold text-white">{section.title}</h2>
-              <div className="space-y-2 text-sm leading-7 text-slate-200">
+            <section key={section.title} className="py-8">
+              <h2 className="text-lg font-bold text-ink md:text-xl">{section.title}</h2>
+              <div className="mt-4 space-y-2 leading-8 text-ink-soft">
                 {section.body.map((line) => (
                   <p key={line}>{line}</p>
                 ))}
               </div>
-            </article>
+            </section>
           ))}
-        </section>
+        </div>
 
-        <footer className="border-t border-white/10 pt-6 text-sm text-slate-400">
-          制定日: 2026年4月21日
-        </footer>
+        <p className="border-t border-line pt-6 text-sm text-mute">制定日: 2026年4月21日</p>
       </div>
     </main>
   );
