@@ -8,7 +8,7 @@ const nav = [
   { href: "/#about", label: "私たちについて" },
   { href: "/#apps", label: "アプリ" },
   { href: "/#process", label: "つくり方" },
-  { href: "/#company", label: "会社概要" },
+  { href: "/#profile", label: "運営者情報" },
 ];
 
 export function Header() {

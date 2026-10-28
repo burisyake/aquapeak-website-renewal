@@ -129,7 +129,7 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
             {[
               { value: String(apps.length), unit: "本", label: "リリースしたアプリ" },
               { value: String(categories.length), unit: "", label: "ジャンル" },
-              { value: "2025", unit: "", label: "創業" },
+              { value: "2025", unit: "", label: "開業" },
             ].map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
@@ -368,13 +368,13 @@ function Process() {
   );
 }
 
-/* ---------- Company ---------- */
+/* ---------- Profile（運営者情報） ---------- */
 
-function Company() {
+function Profile() {
   const address = "東京都渋谷区渋谷2-19-15 宮益坂ビルディング 609";
   const rows = [
-    { label: "会社名", value: "AquaPeak Inc." },
-    { label: "設立", value: "2025年" },
+    { label: "屋号", value: "AquaPeak" },
+    { label: "開業", value: "2025年" },
     {
       label: "所在地",
       value: (
@@ -400,11 +400,11 @@ function Company() {
   ];
 
   return (
-    <section id="company" className="py-24 md:py-32">
+    <section id="profile" className="py-24 md:py-32">
       <div className="mx-auto grid max-w-7xl gap-12 px-5 md:px-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div className="reveal">
-          <Eyebrow>Company</Eyebrow>
-          <h2 className="mt-6 text-3xl font-black text-ink md:text-5xl">会社概要</h2>
+          <Eyebrow>Profile</Eyebrow>
+          <h2 className="mt-6 text-3xl font-black text-ink md:text-5xl">運営者情報</h2>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`}
             target="_blank"
@@ -476,7 +476,7 @@ export default async function Home() {
       <About />
       <Apps apps={apps} />
       <Process />
-      <Company />
+      <Profile />
       <Contact />
     </main>
   );

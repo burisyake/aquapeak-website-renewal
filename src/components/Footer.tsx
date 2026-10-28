@@ -21,7 +21,7 @@ export function Footer() {
             <li><Link href="/#about" className="hover:text-white">私たちについて</Link></li>
             <li><Link href="/#apps" className="hover:text-white">アプリ</Link></li>
             <li><Link href="/#process" className="hover:text-white">つくり方</Link></li>
-            <li><Link href="/#company" className="hover:text-white">会社概要</Link></li>
+            <li><Link href="/#profile" className="hover:text-white">運営者情報</Link></li>
           </ul>
         </div>
         <div>
@@ -36,7 +36,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <p className="mx-auto max-w-7xl px-5 py-6 font-display text-xs md:px-8">
-          © {new Date().getFullYear()} AquaPeak Inc.
+          © {new Date().getFullYear()} AquaPeak
         </p>
       </div>
     </footer>

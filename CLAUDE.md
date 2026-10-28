@@ -20,7 +20,7 @@ Next.js 16 app (App Router) with React 19 and Tailwind CSS v4.
 src/
   app/
     layout.tsx               # Metadata, fonts (Bricolage Grotesque + Zen Kaku Gothic New), Header/Footer
-    page.tsx                 # Top page: Hero / About / Apps / Process / Company / Contact sections
+    page.tsx                 # Top page: Hero / About / Apps / Process / Profile / Contact sections
     privacy-policy/page.tsx  # Privacy policy
     globals.css              # Tailwind import + brand tokens (@theme) + animations
   components/                # Header (client), Footer, Logo, AppIcon, AppExplorer (client: genre filter)
