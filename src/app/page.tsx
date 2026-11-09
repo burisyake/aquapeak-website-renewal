@@ -166,7 +166,7 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
             {[
               { value: String(apps.length), unit: "本", label: "リリースしたアプリ" },
               { value: String(categories.length), unit: "", label: "ジャンル" },
-              { value: "2025", unit: "", label: "開業" },
+              { value: "2020", unit: "", label: "アプリ開発スタート" },
             ].map((s) => (
               <div key={s.label}>
                 <dt className="sr-only">{s.label}</dt>
@@ -410,6 +410,7 @@ function Profile() {
   const address = "東京都渋谷区渋谷2-19-15 宮益坂ビルディング 609";
   const rows = [
     { label: "屋号", value: "AquaPeak" },
+    { label: "アプリ開発開始", value: "2020年" },
     { label: "開業", value: "2025年" },
     {
       label: "所在地",
