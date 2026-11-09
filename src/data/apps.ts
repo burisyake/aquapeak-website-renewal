@@ -174,6 +174,20 @@ export const apps: AppItem[] = [
     href: "https://apps.apple.com/jp/app/kashikari-loan-iou-tracker/id6762706658",
   },
   {
+    appId: "6816061844",
+    name: "スペイン語単語を学ぶ: Vocab Paws",
+    category: "learn",
+    platform: "iOS",
+    description:
+      "ペットを育てながらスペイン語単語を学べる学習アプリ。CEFR A1〜C2とビジネスの3,000語を、名詞の冠詞（el/la）とともに習得できます。",
+    highlights: [
+      "CEFR A1〜C2・ビジネスの3,000語と例文3,034文を収録",
+      "名詞には冠詞（el/la）を表記、15言語の母語解説に対応",
+      "全3,000語無料、間隔反復とペット育成で継続をサポート",
+    ],
+    href: "https://apps.apple.com/jp/app/%E3%82%B9%E3%83%9A%E3%82%A4%E3%83%B3%E8%AA%9E%E5%8D%98%E8%AA%9E%E3%82%92%E5%AD%A6%E3%81%B6-vocab-paws/id6816061844",
+  },
+  {
     appId: "6816064767",
     name: "スペイン語文法: Grammar Paws",
     category: "learn",
@@ -441,6 +455,7 @@ export const genreOrder: Record<CategoryId, string[]> = {
     "6805949109", // 韓国語文法
     "6799179231", // 日本語単語
     "6798627790", // 日本語文法
+    "6816061844", // スペイン語単語
     "6816064767", // スペイン語文法
     "6759558674", // 麻雀クイズ
     "6759827804", // 九九九
