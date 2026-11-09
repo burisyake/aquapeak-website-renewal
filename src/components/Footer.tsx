@@ -8,7 +8,7 @@ export function Footer() {
         <div className="space-y-4">
           <Logo light />
           <p className="max-w-xs text-sm leading-7">
-            毎日を、少し軽くするアプリをつくる。
+            毎日を、少し豊かにするアプリをつくる。
             <br />
             東京・渋谷のプロダクトスタジオです。
           </p>

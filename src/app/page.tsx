@@ -8,8 +8,8 @@ const CONTACT_EMAIL = "assetforecast@gmail.com";
 const principles = [
   {
     no: "01",
-    title: "ひとつの課題に、ひとつのアプリ",
-    text: "あれもこれもと詰め込まず、解きたい「めんどう」をひとつに絞る。だから迷わず使えて、すぐに手放せない道具になります。",
+    title: "ひとつの目的に、ひとつのアプリ",
+    text: "あれもこれもと詰め込まず、届けたい体験をひとつに絞る。だから迷わず使えて、長く手元に置いておきたくなるアプリになります。",
   },
   {
     no: "02",
@@ -105,14 +105,15 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
             少しだけ
             <br />
             <span className="relative inline-block">
-              <span className="relative z-10">軽く</span>
+              <span className="relative z-10">豊かに</span>
               <span className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-aqua-light md:h-5" />
             </span>
             する。
           </h1>
           <p className="mt-8 max-w-xl text-base leading-8 text-ink-soft md:text-lg md:leading-9">
             AquaPeak は、学び・お金・暮らし・おでかけ・遊びの領域で、
-            日々の小さな「めんどう」をほどくアプリを自分たちで企画・開発・運営しているプロダクトスタジオです。
+            暮らしを豊かにするアプリを自分たちで企画・開発・運営しているプロダクトスタジオです。
+            ひとりでも多くの人に、一日でも長く使ってもらえるアプリを目指しています。
           </p>
           <div className="mt-10 flex flex-wrap gap-3">
             <a
@@ -245,14 +246,15 @@ function About() {
         <div className="reveal lg:sticky lg:top-32 lg:self-start">
           <Eyebrow>About us</Eyebrow>
           <h2 className="mt-6 text-3xl leading-[1.45] font-black text-ink md:text-[2.75rem] md:leading-[1.4]">
-            <span className="block whitespace-nowrap">暮らしの中の</span>
-            <span className="block whitespace-nowrap">小さな「めんどう」を、</span>
-            <span className="block whitespace-nowrap">アプリでほどく。</span>
+            <span className="block whitespace-nowrap">アプリが、</span>
+            <span className="block whitespace-nowrap">新しい毎日の</span>
+            <span className="block whitespace-nowrap">きっかけになる。</span>
           </h2>
           <p className="mt-8 leading-8 text-ink-soft">
-            家計の見通し、外国語の勉強、家の在庫、旅の記録。どれも大事なのに、つい後回しになってしまうこと。
-            AquaPeak はそうした日常のひっかかりに目を向け、ひとつずつアプリという形で解決してきました。
-            水のようになめらかに暮らしに溶け込み、山頂からの景色のように先を見通せる体験を目指しています。
+            新しい知識を身につける。まだ行ったことのない場所へ出かけてみる。夢中になれる趣味に出会う。
+            暮らしが豊かになる瞬間は、いつも小さなきっかけから始まります。
+            AquaPeak は、そのきっかけをアプリという形で届け、ひとりでも多くの人の毎日を支えたいと考えています。
+            水のようにそっと暮らしに寄り添い、山頂からの景色のように新しい世界を広げる存在を目指しています。
           </p>
         </div>
 

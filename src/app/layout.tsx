@@ -19,18 +19,18 @@ const jp = Zen_Kaku_Gothic_New({
 });
 
 const description =
-  "AquaPeakは東京・渋谷のプロダクトスタジオです。学び・お金・暮らし・おでかけ・ゲームの領域で、毎日を少し軽くするアプリを自分たちで企画・開発・運営しています。";
+  "AquaPeakは東京・渋谷のプロダクトスタジオです。学び・お金・暮らし・おでかけ・ゲームの領域で、毎日を少し豊かにするアプリを自分たちで企画・開発・運営しています。";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://aquapeak.example.com"),
   title: {
-    default: "AquaPeak | 毎日を、少し軽くするアプリをつくる",
+    default: "AquaPeak | 毎日を、少し豊かにするアプリをつくる",
     template: "%s | AquaPeak",
   },
   description,
   keywords: ["AquaPeak", "アプリ開発", "iOSアプリ", "プロダクトスタジオ", "渋谷"],
   openGraph: {
-    title: "AquaPeak | 毎日を、少し軽くするアプリをつくる",
+    title: "AquaPeak | 毎日を、少し豊かにするアプリをつくる",
     description,
     type: "website",
     url: "/",
