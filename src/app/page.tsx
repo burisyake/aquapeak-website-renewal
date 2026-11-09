@@ -100,15 +100,15 @@ function Hero({ apps }: { apps: AppWithIcon[] }) {
         <div>
           <Eyebrow>Product Studio · Shibuya, Tokyo</Eyebrow>
           <h1 className="mt-6 text-[2.75rem] leading-[1.2] font-black tracking-tight text-ink sm:text-6xl lg:text-7xl">
-            毎日を、
+            毎日に、
             <br />
-            少しだけ
+            新しい
             <br />
             <span className="relative inline-block">
-              <span className="relative z-10">豊かに</span>
+              <span className="relative z-10">きっかけ</span>
               <span className="absolute inset-x-0 bottom-1 -z-0 h-4 rounded-full bg-aqua-light md:h-5" />
             </span>
-            する。
+            を。
           </h1>
           <p className="mt-8 max-w-xl text-base leading-8 text-ink-soft md:text-lg md:leading-9">
             AquaPeak は、学び・お金・暮らし・おでかけ・遊びの領域で、
